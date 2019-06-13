@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SocialgeekingApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(SocialgeekingApplication.class, args);
+
     }
 
 }
