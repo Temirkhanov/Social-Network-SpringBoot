@@ -11,6 +11,4 @@ public class SocialgeekingApplication {
         SpringApplication.run(SocialgeekingApplication.class, args);
 
     }
-
 }
-
