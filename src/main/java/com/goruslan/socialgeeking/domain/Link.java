@@ -7,6 +7,9 @@ import lombok.NonNull;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /** Description of annotations.
@@ -27,7 +30,7 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 
-public class Link {
+public class Link extends Auditable{
 
     @Id
     @GeneratedValue
@@ -39,6 +42,8 @@ public class Link {
     @NonNull
     private String url;
 
-
+    // Comments. Mapping: One to Many. Link -> Comments
+    @OneToMany(mappedBy = "link")
+    private List<Comment> comments = new ArrayList<>();
 
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 /** Description of annotations.
@@ -24,12 +25,15 @@ import javax.persistence.Id;
 @Entity
 @Data
 @NoArgsConstructor
-public class Comment {
+public class Comment extends Auditable{
 
     @Id
     @GeneratedValue
     private Long id;
     private String body;
 
+    // Link. Mapping: Many to One. Comments -> Link.
+    @ManyToOne
+    private Link link;
 
 }
