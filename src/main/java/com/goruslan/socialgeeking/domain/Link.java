@@ -3,6 +3,7 @@ package com.goruslan.socialgeeking.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,6 +30,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class Link extends Auditable{
 
     @Id
@@ -45,4 +47,7 @@ public class Link extends Auditable{
     @OneToMany(mappedBy = "link")
     private List<Comment> comments = new ArrayList<>();
 
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
 }
