@@ -25,8 +25,7 @@ public class SocialgeekingApplication {
 
     }
 
-
-    @Bean
+    // @Bean
     CommandLineRunner runner(LinkRepository linkRepository, CommentRepository commentRepository) {
         return args -> {
             Link link = new Link("MyLink number1", "url.com/haha");
@@ -34,8 +33,6 @@ public class SocialgeekingApplication {
             Comment comment = new Comment("Comment from the main", link);
             commentRepository.save(comment);
             link.addComment(comment);
-
-
             System.out.println("INSERTED _____________+++++++++++++++______________");
         };
     }
