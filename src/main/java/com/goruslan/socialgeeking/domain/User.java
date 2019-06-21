@@ -12,6 +12,7 @@ import java.util.*;
 
 @Entity
 @RequiredArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -26,6 +27,13 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @NonNull
+    @Column(length = 150)
+    private String password;
+
+    @NonNull
+    @Column(nullable = false)
+    private boolean enabled;
 
     // Sets up 3rd table between roles and users. User might have one or few roles so we fetch all the roles.
     @ManyToMany(fetch = FetchType.EAGER)
@@ -36,13 +44,13 @@ public class User implements UserDetails {
     )
     private Set<Role> roles = new HashSet<>();
 
-    @Column(length = 150)
-    private String password;
+    public void addRole(Role role) {
+        roles.add(role);
+    }
 
-    @NonNull
-    @Column(nullable = false)
-    private boolean enabled;
-
+    public void addRoles(Set<Role> roles) {
+        roles.forEach(this::addRole);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
