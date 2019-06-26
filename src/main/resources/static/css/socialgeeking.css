@@ -16,6 +16,12 @@ button.nav-link {
     cursor: pointer;
 }
 
+button.nav-link {
+    background: #2D2A27;
+    border:none;
+    cursor: pointer;
+}
+
 
 body {
     background: #ffffff;
