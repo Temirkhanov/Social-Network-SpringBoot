@@ -1,79 +1,86 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layouts/main_layout :: head(title = 'Springit - Login')}">
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head th:replace="~{layouts/main_layout :: head(title = 'Social Geeking')}">
 </head>
+
 <body>
-
 <nav th:replace="~{layouts/main_layout :: nav}"></nav>
-<div th:replace="~{layouts/main_layout :: jumbotron}"></div>
 
-<div class="container">
-
-    <!-- login -->
-    <form class="form-horizontal" role="form" method="POST" th:action="@{/login}">
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <h2>Please Login</h2>
-                <hr>
-                <div class="alert alert-danger" th:if="${param.error != null}">
-                    Invalid username and password.
-                </div>
-                <div class="alert alert-success" th:if="${param.logout != null}">
-                    You have been logged out.
-                </div>
-            </div>
-            <div class="col-md-3"></div>
+<!-- Start: Login Form Clean -->
+<div
+        class="login-clean"
+        style="background-color: rgb(255,255,255);margin-top: 3vh;"
+>
+    <form method="post" th:action="@{/login}">
+        <div class="alert alert-danger" th:if="${param.error != null}">
+            Invalid username and password.
         </div>
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <div class="form-group has-danger">
-                    <label class="sr-only" for="email">E-Mail Address</label>
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
-                        <input type="text" name="email" class="form-control" id="email" placeholder="you@example.com" required autofocus>
-                    </div>
+        <div class="alert alert-success" th:if="${param.logout != null}">
+            You have been logged out.
+        </div>
+        <h2 class="sr-only">Login Form</h2>
+        <div class="illustration"></div>
+        <div class="form-row" style="margin-bottom: 3vh;">
+            <div
+                    class="col d-xl-flex justify-content-xl-center align-items-xl-center"
+            >
+                <img th:src="@{/css/logo.svg}" style="max-width: 90%;" />
+            </div>
+        </div>
+        <div class="form-row" style="margin-bottom: 2vh;">
+            <div class="col">
+                <input
+                        class="form-control"
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        style="background-color: rgba(101,206,255,0.26);"
+                />
+            </div>
+        </div>
+        <div class="form-row" style="margin-bottom: 2vh;">
+            <div class="col">
+                <input
+                        class="form-control"
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        style="background-color: rgba(101,206,255,0.26);"
+                />
+            </div>
+        </div>
+        <div class="form-row" style="margin-bottom: 1vh;">
+            <div class="col">
+                <div class="form-check">
+                    <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="formCheck-1"
+                    /><label class="form-check-label" id="remember-me" name="remember-me" for="formCheck-1"
+                >Remember Me</label
+                >
                 </div>
             </div>
-            <div class="col-md-3"></div>
         </div>
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="sr-only" for="password">Password</label>
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
-                    </div>
-                </div>
+        <div class="form-row" style="margin-bottom: 4vh;">
+            <div class="col">
+                <button
+                        class="btn btn-primary btn-block"
+                        type="submit"
+                        style="background-color: #3aabe0;"
+                >
+                    Log In
+                </button>
             </div>
-            <div class="col-md-3"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6" style="padding-top: .35rem">
-                <div class="form-check mb-2 mr-sm-2 mb-sm-0">
-                    <label class="form-check-label">
-                        <input id="remember-me" name="remember-me" class="form-check-input" type="checkbox" >
-                        <span style="padding-bottom: .15rem">Remember me</span>
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-3"></div>
-        </div>
-        <div class="row" style="padding-top: 1rem">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <button type="submit" class="btn btn-success"><i class="fas fa-sign-in-alt"></i> Login</button>
-                <!-- <a class="btn btn-link" href="forgotPassword.html">Forgot Your Password?</a> -->
-            </div>
-            <div class="col-md-3"></div>
         </div>
     </form>
-
 </div>
-
+<!-- End: Login Form Clean -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

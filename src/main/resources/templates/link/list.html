@@ -1,42 +1,143 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layouts/main_layout :: head(title = 'Springit - Spring Boot Reddit Clone')}">
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head  th:replace="~{layouts/main_layout :: head(title = 'Social Geeking')}">
+
 </head>
-<body>
+
+<body
+        class="d-flex flex-column"
+        id="hero"
+        style="background-color: #ffffff;height: 100%;"
+>
+<!-- Start: Navigation with Button -->
+
+    <nav th:replace="~{layouts/main_layout :: nav}"></nav>
 
 
-<nav th:replace="~{layouts/main_layout :: nav}"></nav>
-<div th:replace="~{layouts/main_layout :: jumbotron}"></div>
+<!-- End: Navigation with Button -->
 
-<div class="container">
 
-    <!-- links -->
-    <div class="row link" th:each="link : ${links}">
-        <div class="col-1">
-            <div><a href="#" class="upvote"><i class="fas fa-arrow-up"></i></a></div>
-            <div><span class="votecount">3</span></div>
-            <div><a href="#" class="downvote"><i class="fas fa-arrow-down"></i></a></div>
-        </div>
-        <div class="col-11">
-            <p class="title">
-                <a class="title " th:href="@{'/link/' + ${link.id}}" th:text="${link.title}">
-                    Title Goes Here
+<!--************************************************************************************************
+ **************************************************************************************************-->
+
+<section
+        class="d-flex"
+        style="padding: 4vh;padding-top: 5vh;width: 100%;height: 100%;"
+>
+    <div
+            class="container flex-column-reverse"
+            style="height: 100%;width: 100%;"
+            th:fragment="content"
+    >
+        <div
+                class="row"
+                style="margin-right: 0;"
+                sec:authorize="isAuthenticated()"
+        >
+            <div class="col">
+                <a th:href="@{/link/submit}">
+                    <button
+                            class="btn btn-success text-center border rounded-circle d-block float-right d-lg-flex"
+                            type="button"
+                            style="padding: 10px;margin-bottom: 1vh;"
+                    >
+                        <i
+                                class="fa fa-plus float-left"
+                                style="padding: 5px; padding-left: 7px; padding-right: 7px; margin: 0;margin-right: 0px;font-size: 22px;"
+                        ></i>
+                    </button>
                 </a>
-                <span class="domain">(<a th:href="${link.url}" th:text="${link.getDomainName()}">goRuslan.com</a>)</span>
-            </p>
-            <p class="tagline ">submitted
-                <!--<time title="Sat Mar 10 06:26:36 2018 UTC" datetime="2018-03-10T06:26:36+00:00" class="live-timestamp">2 hours ago</time> by-->
-                <time th:title="${link.getCreationDate()}" th:datetime="${link.getCreationDate()}" class="live-timestamp" th:text="${link.getPrettyTime()}">1 hour(s)</time> by
-                <a href="/" class="author" th:text="${link.createdBy}">goRuslan</a>
-            </p>
-            <p>
-                <a th:href="@{'/link/' + ${link.id} + '#comments'}" class="comments" th:text="|${link.getComments().size()} comments|"><i class="fas fa-comments"></i> 0 comments</a>
-                <a href="/" class="share"><i class="fas fa-share-square"></i> share</a>
-            </p>
+
+            </div>
+        </div>
+
+        <!-- links -->
+
+        <div class="row card" style="margin: 2vh;" th:each="link : ${links}">
+            <div class="card-body" style="padding: 2vh; padding-bottom: 0;">
+                <h6
+                        class="card-title "
+                        th:href="@{'/link/' + ${link.id}}"
+                        th:text="${link.title}"
+                        style="margin:5px; "
+                >
+                    Title Goes Here
+                </h6>
+                <span class="text-muted card-subtitle mb-2" style="margin:6px; margin-bottom: 3vh;"
+                >submitted
+              <time
+                      th:title="${link.getCreationDate()}"
+                      th:datetime="${link.getCreationDate()}"
+                      class="live-timestamp"
+                      th:text="${link.getPrettyTime()}"
+              >1 hour(s)</time
+              >
+              by
+              <a href="/" class="author" th:text="${link.createdBy}"
+              >goRuslan</a
+              ></span
+                >
+
+                <p class="card-text" style="font-size: 17px; margin: 10px;">
+                    Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo
+                    odio, dapibus ac facilisis in, egestas eget quam. Donec id elit
+                    non mi porta gravida at eget metus.
+                </p>
+                <div
+                        class="btn-group border-white border-primary-color"
+                        role="group"
+                >
+                    <button
+                            class="btn"
+                            type="button"
+                            style="background-color: rgba(30,126,52,0);color: #1eb53a;"
+                    >
+                <span
+                        class="badge badge-primary"
+                        style="margin-right: 2px;color: rgb(123,126,123);font-size: 2vh;background-color: rgba(0,123,255,0);"
+                >42</span
+                ><i class="fa fa-thumbs-up" style="font-size: 2.5vh;"></i>
+                    </button>
+                    <button
+                            class="btn"
+                            type="button"
+                            style="background-color: rgba(30,126,52,0);color: #e5053a;"
+                    >
+                <span
+                        class="badge badge-primary"
+                        style="margin-right: 2px;color: rgb(123,126,123);font-size: 2vh;background-color: rgba(0,123,255,0);"
+                >42</span
+                ><i class="fa fa-thumbs-down" style="font-size: 2.5vh;"></i>
+                    </button>
+
+                    <!-- Comments -->
+
+                    <a th:href="@{'/link/' + ${link.id} + '#comments'}">
+                        <button
+                                class="btn"
+                                type="button"
+                                style="color: #3aabe0;background-color: rgba(30,126,52,0);"
+
+                        >
+                <span
+                        class="badge badge-primary"
+                        style="margin-right: 2px;color: rgb(123,126,123);font-size: 2vh;background-color: rgba(0,123,255,0);"
+                        th:text="${link.getComments().size()}"
+                >0</span
+                ><i class="fa fa-commenting" style="font-size: 2.5vh;"></i>
+                        </button>
+                    </a>
+
+                </div>
+            </div>
         </div>
     </div>
-
-</div>
-
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

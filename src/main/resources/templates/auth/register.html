@@ -1,106 +1,98 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layouts/main_layout :: head(title = 'Springit - Register for an account')}">
-</head>
-<body>
-<nav th:replace="~{layouts/main_layout :: nav}"></nav>
-<div th:replace="~{layouts/main_layout :: jumbotron}"></div>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head th:replace="~{layouts/main_layout :: head(title = 'Social Geeking')}">
+  </head>
 
-<!-- User Registration form -->
-<form class="form-horizontal" role="form" method="POST" action="">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <h2>Register New User</h2>
-            <hr>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3 field-label-responsive">
-            <label for="name">Name</label>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
-                    <input type="text" name="name" class="form-control" id="name"
-                           placeholder="John Doe" required autofocus>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-control-feedback">
-                            <span class="text-danger align-middle">
-                                <!-- Put name validation error messages here -->
-                            </span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3 field-label-responsive">
-            <label for="email">E-Mail Address</label>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
-                    <input type="text" name="email" class="form-control" id="email"
-                           placeholder="you@example.com" required autofocus>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-control-feedback">
-                            <span class="text-danger align-middle">
-                                <!-- Put e-mail validation error messages here -->
-                            </span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3 field-label-responsive">
-            <label for="password">Password</label>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group has-danger">
-                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-key"></i></div>
-                    <input type="password" name="password" class="form-control" id="password"
-                           placeholder="Password" required>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-control-feedback">
-                            <span class="text-danger align-middle">
-                                Example Error Message
-                            </span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3 field-label-responsive">
-            <label for="password">Confirm Password</label>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div class="input-group-addon" style="width: 2.6rem">
-                        <i class="fas fa-key"></i>
-                    </div>
-                    <input type="password" name="password-confirmation" class="form-control"
-                           id="password-confirm" placeholder="Password" required>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
-        </div>
-    </div>
-</form>
+  <body>
+    <nav th:replace="~{layouts/main_layout :: nav}"></nav>
 
-</body>
+    <!-- Start: Registration Form with Photo -->
+    <div
+      class="register-photo"
+      role="form"
+      style="background-color: rgb(255,255,255);"
+    >
+      <!-- Start: Form Container -->
+      <div class="form-container" style="max-width: 700px;">
+        <form method="POST" style="padding-right: 20px;padding-left: 20px;">
+          <div class="form-row" style="margin-bottom: 3vh;">
+            <div class="col">
+              <h2 class="text-center"><strong>Create</strong> an account.</h2>
+            </div>
+          </div>
+          <div class="form-row" style="margin-bottom: 3vh;">
+            <div
+              class="col d-lg-flex justify-content-lg-center align-items-lg-center"
+            >
+              <input
+                class="border rounded form-control"
+                type="text"
+                name="name"
+                placeholder="Name"
+                style="max-width: 500px;background-color: rgba(113,210,255,0.27);"
+                required autofocus />
+            </div>
+          </div>
+          <div class="form-row" style="margin-bottom: 3vh;">
+            <div
+              class="col d-lg-flex justify-content-lg-center align-items-lg-center"
+            >
+              <input
+                class="border rounded form-control"
+                type="email"
+                name="email"
+                placeholder="Email"
+                style="max-width: 500px;background-color: rgba(113,210,255,0.27);"
+                required autofocus/>
+            </div>
+          </div>
+          <div class="form-row" style="margin-bottom: 3vh;">
+            <div
+              class="col d-lg-flex justify-content-lg-center align-items-lg-center"
+            >
+              <input
+                class="border rounded form-control"
+                type="password"
+                name="password"
+                placeholder="Password"
+                style="max-width: 500px;background-color: rgba(113,210,255,0.27);"
+                required/>
+            </div>
+          </div>
+          <div class="form-row" style="margin-bottom: 3vh;">
+            <div
+              class="col d-lg-flex justify-content-lg-center align-items-lg-center"
+            >
+              <input
+                class="border rounded form-control"
+                type="password"
+                name="password-repeat"
+                placeholder="Password (repeat)"
+                style="max-width: 500px;background-color: rgba(113,210,255,0.27);"
+                required/>
+            </div>
+          </div>
+          <div class="form-row" style="padding-bottom: 3vh;">
+            <div class="col d-lg-flex justify-content-lg-center">
+              <button
+                class="btn btn-primary btn-block d-lg-flex justify-content-lg-center"
+                type="submit"
+                style="max-width: 400px;margin-top: 15px;background-color: #3aabe0;"
+              >
+                Sign Up
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- End: Form Container -->
+    </div>
+    <!-- End: Registration Form with Photo -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>

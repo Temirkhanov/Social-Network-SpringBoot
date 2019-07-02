@@ -1,82 +1,109 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 <head th:fragment="head(title)">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title th:text="${title}">socialgeeking - Spring Boot Reddit Clone</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- Custom styles for this template -->
+    <meta charset="utf-8" />
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title th:text="${title}">Social Geeking</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto"
+    />
+
     <link rel="stylesheet" th:href="@{/css/socialgeeking.css}">
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Roboto" >
-    <!-- Font Awesome (for icons) -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <!-- <link rel="stylesheet" th:href="@{/css/styles.css}" /> -->
 </head>
-<body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-spring fixed-top" th:fragment="navigation">
-    <div class="container">
-        <a class="navbar-brand" href="/">
-            <i class="fa fa-leaf" aria-hidden="true"></i>
-            socialgeeking
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+<body
+>
+<!-- Start: Navigation with Button -->
+<div>
+    <nav
+            class="navbar navbar-light navbar-expand-md navigation-clean-button"
+            style="height: 9vh;"
+            th:fragment="navigation"
+    >
+        <div class="container">
+            <a class="navbar-brand" href="/"
+            ><img
+                    th:src="@{/css/logo.svg}"
+                    style="min-height: 5vh;max-height: 7vh;"/></a
+            ><button
+                data-toggle="collapse"
+                class="navbar-toggler"
+                data-target="#navcol-1"
+        >
+            <span class="sr-only">Toggle navigation</span
+            ><span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">
-                        <i class="fas fa-home" aria-hidden="true"></i> Home
-                    </a>
-                </li>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul
+                        class="nav navbar-nav mx-auto"
+                        style="font-family: Roboto, sans-serif;"
+                >
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" href="#">Posts</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="#">Geeks</a>
+                    </li>
 
-                <!-- if user is signed in -->
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" th:href="@{/link/submit}">
-                        <i class="fa fa-link" aria-hidden="true"></i> Submit Link</a>
-                </li>
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" th:href="@{/profile}">
-                        <i class="fa fa-user" aria-hidden="true"></i> Account</a>
-                </li>
-                <li class="nav-item">
-                    <form method="POST" th:action="@{/logout}" sec:authorize="isAuthenticated()">
-                        <button class="nav-link"><i class="fa fa-sign-out-alt" aria-hidden="true"></i> Sign Out</button>
-                    </form>
-                </li>
+                    <!-- if user is signed in -->
+
+                    <li
+                            class="nav-item"
+                            role="presentation"
+                            sec:authorize="isAuthenticated()"
+                    >
+                        <a class="nav-link" th:href="@{/profile}">Profile</a>
+                    </li>
+                </ul>
+                <span class="navbar-text actions">
+              <form method="POST" th:action="@{/logout}" sec:authorize="isAuthenticated()">
+                <button class="btn btn-danger"
+                >Sign Out</button
+                >
+              </form>
+                </span>
 
                 <!-- if user is not signed in -->
-                <li class="nav-item" sec:authorize="!isAuthenticated()">
-                    <a class="nav-link" th:href="@{/login}">
-                        <i class="fa fa-sign-in-alt" aria-hidden="true"></i> Sign In</a>
-                </li>
-                <li class="nav-item" sec:authorize="!isAuthenticated()">
-                    <a class="nav-link" th:href="@{/register}">
-                        <i class="fa fa-user-plus" aria-hidden="true"></i> Register</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
-<div class="jumbotron jumbotron-fluid" th:fragment="jumbotron">
-    <div class="container" align="center">
-        <h2 class="display-4">Spring Boot Reddit Clone</h2>
-        <p class="lead">This is a reddit clone built using <a href="#">Spring Boot 2</a>, <a href="#"></a>Spring Framework 5</a> & so many other great projects! If you would like to learn how to build this
-            application you can check out my course, <a href="#">Getting Started with Spring Boot 2</a>.</p>
-        <a href="http://www.github.com/cfaddict/socialgeeking" class="btn btn-success" target="_blank"><i class="fab fa-github"></i>  Github Repo</a>
-        <a href="https://therealdanvega.teachable.com/p/spring-boot-2" class="btn btn-success" target="_blank"><i class="fas fa-graduation-cap"></i> Spring Boot 2 Course</a>
-    </div>
+                <span
+                        class="navbar-text actions"
+                        sec:authorize="!isAuthenticated()"
+                >
+              <a class="login" th:href="@{/login}">Sign In</a>
+              <a
+                      class="btn btn-light action-button"
+                      role="button"
+                      th:href="@{/register}"
+                      style="background-color: rgb(58,171,224);"
+              >Sign Up</a
+              >
+            </span>
+            </div>
+        </div>
+    </nav>
 </div>
 
+<!-- End: Navigation with Button -->
+
 <div class="container" th:fragment="content">
-    <p>This is your main content</p>
+    <p>Main content</p>
 </div>
 
 </body>

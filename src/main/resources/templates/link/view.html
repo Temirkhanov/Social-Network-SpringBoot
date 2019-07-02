@@ -1,77 +1,132 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layouts/main_layout :: head(title = 'socialgeeking - Spring Boot Reddit Clone')}">
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head
+        th:replace="~{layouts/main_layout :: head(title = 'socialgeeking - Spring Boot Reddit Clone')}"
+>
 </head>
+
 <body>
-
 <nav th:replace="~{layouts/main_layout :: nav}"></nav>
-<div th:replace="~{layouts/main_layout :: jumbotron}"></div>
 
-<div class="container">
-
+<div class="container" style="margin-top: 10vh;">
     <div class="alert alert-success" role="alert" th:if="${success}">
-        New link was created!
+        New post was created!
     </div>
 
-    <!-- link -->
-    <div class="row link">
-        <div class="col-1">
-            <div><a href="#" class="upvote"><i class="fas fa-arrow-up"></i></a></div>
-            <div><span class="votecount">3</span></div>
-            <div><a href="#" class="downvote"><i class="fas fa-arrow-down"></i></a></div>
-        </div>
-        <div class="col-11">
-            <p class="title">
-                <a class="title " th:href="${link.url}" th:text="${link.title}" target="_blank">
-                    What's new in Spring Boot 2?
-                </a>
-                <span class="domain">(<a th:href="${link.url}" th:text="${link.getDomainName()}">goruslan.com</a>)</span>
-            </p>
-            <p class="tagline ">submitted
-                <time th:title="${link.getCreationDate()}" th:datetime="${link.getCreationDate()}" class="live-timestamp" th:text="${link.getPrettyTime()}">2 hours ago</time> by
-                <a href="https://www.reddit.com/user/goruslan" class="author" th:text="${link.createdBy}">goruslan</a>
-                <span class="userattrs"></span>
-            </p>
-            <p><a th:href="${link.url}" th:text="${link.url}" target="_blank"></a></p>
-            <p>
-                <a href="#" class="comments" th:text="|${link.getComments().size()} comments|"><i class="fas fa-comments"></i> 8 comments</a>
-                <a href="#" class="share"><i class="fas fa-share-square"></i> share</a>
-            </p>
-        </div>
-    </div>
+    <!-- Post -->
 
-    <!-- link comments -->
-    <div id="comments" class="comments">
-        <div class="row header">
-            <div class="col-1">&nbsp;</div>
-            <div class="col-11 title" th:text="|all ${link.getComments().size()} comments|">
-                all 21 comments
-            </div>
-        </div>
-        <div class="row addcomment">
-            <div class="col-1">&nbsp;</div>
-            <div class="col-11">
-                <div class="form-group">
-                    <textarea class="form-control" id="comment" rows="3"></textarea>
+    <div class="row">
+        <div class="card col-10" style="">
+            <div class="card-body" style="padding: 2vh;padding-bottom: 1vh;">
+                <h5 class="card-title" th:text="${link.title}">
+                    Title
+                </h5>
+                <span
+                        class="text-muted card-subtitle mb-2"
+                        style="margin:6px; margin-bottom: 3vh;"
+                >submitted
+              <time
+                      th:title="${link.getCreationDate()}"
+                      th:datetime="${link.getCreationDate()}"
+                      class="live-timestamp"
+                      th:text="${link.getPrettyTime()}"
+              >1 hour(s)</time
+              >
+              by
+              <a href="/" class="author" th:text="${link.createdBy}"
+              >goRuslan</a
+              ></span
+                >
+                <p class="card-text" th:text="${link.url}">
+                    Some Text Here.
+                </p>
+                <div
+                        class="btn-group border-white border-primary-color"
+                        role="group"
+                >
+                    <button
+                            class="btn"
+                            type="button"
+                            style="background-color: rgba(30,126,52,0);color: #1eb53a;"
+                    >
+                <span
+                        class="badge badge-primary"
+                        style="margin-right: 2px;color: rgb(123,126,123);font-size: 2vh;background-color: rgba(0,123,255,0);"
+                >42</span
+                ><i class="fa fa-thumbs-up" style="font-size: 2.5vh;"></i>
+                    </button>
+                    <button
+                            class="btn"
+                            type="button"
+                            style="background-color: rgba(30,126,52,0);color: #e5053a;"
+                    >
+                <span
+                        class="badge badge-primary"
+                        style="margin-right: 2px;color: rgb(123,126,123);font-size: 2vh;background-color: rgba(0,123,255,0);"
+                >42</span
+                ><i
+                            class="fa fa-thumbs-down"
+                            style="font-size: 2.5vh;"
+                    ></i></button
+                    ><button
+                        class="btn"
+                        type="button"
+                        style="color: #3aabe0;background-color: rgba(30,126,52,0);"
+                >
+                <span
+                        class="badge badge-primary"
+                        style="margin-right: 2px;color: rgb(123,126,123);font-size: 2vh;background-color: rgba(0,123,255,0);"
+                        th:text="${link.getComments().size()}"
+                >42</span
+                ><i class="fa fa-commenting" style="font-size: 2.5vh;"></i>
+                </button>
                 </div>
-                <button type="submit" class="btn btn-primary">Add Comment</button>
-            </div>
-        </div>
-        <!-- single comment -->
-        <div class="row comment">
-            <div class="col-1">&nbsp;</div>
-            <div class="col-11">
-                <span><a href="#"><i class="far fa-user"></i> goruslan</a></span>
-                <span><i class="far fa-clock"></i> 4 hours ago</span>
-                <p class="body">It’s one thing I never care about, new releases of maven. Yet I do for most other things.. I really should take a look at any features released in the last while! Pull my dependencies, run my tests and upload to nexus. I don’t care for much else, I wonder what if any I’m missing.</p>
-                <a href="#" class="permalink"><i class="fas fa-link"></i> permalink</a>
-                <a href="#" class="like"><i class="far fa-thumbs-up"></i> Like</a>
-            </div>
-        </div>
+                <div
+                        class="form-group d-flex flex-row justify-content-between align-items-center align-content-center"
+                >
 
+              <textarea
+                      class="border rounded"
+                      style="width: 90%;margin-right: 1vh;margin-top: 2vh;padding: 1vh;"
+                      placeholder="Your comment goes here..."
+              ></textarea
+              ><button
+                        class="btn btn-primary border-primary-color"
+                        type="button"
+                        style="background-color: #3aabe0;"
+                >
+                    Submit
+                </button>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Comment -->
+    <div
+            class="row d-flex d-lg-flex justify-content-center justify-content-lg-center"
+            style="margin-top: 3vh; border: 1px solid rgba(0,0,0,.125);"
+    >
+        <div
+                class="col"
+                style="margin: 1vh;padding-top: 1vh;"
+        >
+            <h6 style="margin-left: 0;margin-bottom: 1vh;font-size: 2vh;">
+                <i
+                        class="fa fa-user"
+                        style="font-size: 2.5vh;margin-right: 1vh;color: #3aabe0;"
+                ></i
+                >User_name
+            </h6>
+            <p>This is a test comment for the post This is a test comment for the postThis is a test comment for the postThis is a test comment for the postThis is a test comment for the postThis is a test comment for the post</p>
+        </div>
+    </div>
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
