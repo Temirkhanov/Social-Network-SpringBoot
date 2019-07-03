@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html
-        lang="en"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-<head th:replace="~{layouts/main_layout :: head(title = 'Social Geeking')}">
-</head>
+  <head th:replace="~{layouts/main_layout :: head(title = 'Social Geeking')}">
+  </head>
 
-<body>
-<nav th:replace="~{layouts/main_layout :: nav}"></nav>
+  <body>
+    <nav th:replace="~{layouts/main_layout :: nav}"></nav>
 
     <!-- Start: Contact Form Clean -->
     <div class="contact-clean" style="background-color: rgb(255,255,255);">
       <form
-        id="frmAddLink"
+        id="frmAddPost"
         method="POST"
-        th:action="@{/link/submit}"
-        th:object="${link}"
+        th:action="@{/post/submit}"
+        th:object="${post}"
         style="margin-top: 3vh;"
       >
         <h2 class="text-center">New Post</h2>

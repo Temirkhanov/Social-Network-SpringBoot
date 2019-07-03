@@ -40,7 +40,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Link extends Auditable{
+public class Post extends Auditable{
 
     @Id
     @GeneratedValue
@@ -55,8 +55,8 @@ public class Link extends Auditable{
     @URL(message = "Please enter a valid url.")
     private String url;
 
-    // Comments. Mapping: One to Many. Link -> Comments
-    @OneToMany(mappedBy = "link")
+    // Comments. Mapping: One to Many. Post -> Comments
+    @OneToMany(mappedBy = "post")
     private List<Comment> comments = new ArrayList<>();
 
     public void addComment(Comment comment) {

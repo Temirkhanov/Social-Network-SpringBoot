@@ -37,9 +37,9 @@ public class Comment extends Auditable{
     @NonNull
     private String body;
 
-    // Link. Mapping: Many to One. Comments -> Link.
+    // Post. Mapping: Many to One. Comments -> Post.
     @ManyToOne
     @NonNull
-    private Link link;
+    private Post post;
 
 }

@@ -1,6 +1,6 @@
 package com.goruslan.socialgeeking.repository;
 
-import com.goruslan.socialgeeking.domain.Link;
+import com.goruslan.socialgeeking.domain.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
@@ -19,6 +19,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 
 
-public interface LinkRepository extends JpaRepository<Link, Long> {
+public interface PostRepository extends JpaRepository<Post, Long> {
 
 }

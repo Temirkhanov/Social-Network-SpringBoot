@@ -22,7 +22,7 @@
     <div class="row">
         <div class="card col-10" style="">
             <div class="card-body" style="padding: 2vh;padding-bottom: 1vh;">
-                <h5 class="card-title" th:text="${link.title}">
+                <h5 class="card-title" th:text="${post.title}">
                     Title
                 </h5>
                 <span
@@ -30,18 +30,18 @@
                         style="margin:6px; margin-bottom: 3vh;"
                 >submitted
               <time
-                      th:title="${link.getCreationDate()}"
-                      th:datetime="${link.getCreationDate()}"
+                      th:title="${post.getCreationDate()}"
+                      th:datetime="${post.getCreationDate()}"
                       class="live-timestamp"
-                      th:text="${link.getPrettyTime()}"
+                      th:text="${post.getPrettyTime()}"
               >1 hour(s)</time
               >
               by
-              <a href="/" class="author" th:text="${link.createdBy}"
+              <a href="/" class="author" th:text="${post.createdBy}"
               >goRuslan</a
               ></span
                 >
-                <p class="card-text" th:text="${link.url}">
+                <p class="card-text" th:text="${post.url}">
                     Some Text Here.
                 </p>
                 <div
@@ -80,7 +80,7 @@
                 <span
                         class="badge badge-primary"
                         style="margin-right: 2px;color: rgb(123,126,123);font-size: 2vh;background-color: rgba(0,123,255,0);"
-                        th:text="${link.getComments().size()}"
+                        th:text="${post.getComments().size()}"
                 >42</span
                 ><i class="fa fa-commenting" style="font-size: 2.5vh;"></i>
                 </button>

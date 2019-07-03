@@ -1,110 +1,110 @@
 <!DOCTYPE html>
 <html
-        lang="en"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-<head th:fragment="head(title)">
+  <head th:fragment="head(title)">
     <meta charset="utf-8" />
     <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     />
     <title th:text="${title}">Social Geeking</title>
     <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
     />
     <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto"
     />
 
-    <link rel="stylesheet" th:href="@{/css/socialgeeking.css}">
+    <link rel="stylesheet" th:href="@{/css/socialgeeking.css}" />
     <!-- <link rel="stylesheet" th:href="@{/css/styles.css}" /> -->
-</head>
+  </head>
 
-<body
->
-<!-- Start: Navigation with Button -->
-<div>
-    <nav
-            class="navbar navbar-light navbar-expand-md navigation-clean-button"
-            style="height: 9vh;"
-            th:fragment="navigation"
-    >
+  <body>
+    <!-- Start: Navigation with Button -->
+    <div>
+      <nav
+        class="navbar navbar-light navbar-expand-md navigation-clean-button"
+        style="height: 9vh;"
+        th:fragment="navigation"
+      >
         <div class="container">
-            <a class="navbar-brand" href="/"
+          <a class="navbar-brand" href="/"
             ><img
-                    th:src="@{/css/logo.svg}"
-                    style="min-height: 5vh;max-height: 7vh;"/></a
-            ><button
-                data-toggle="collapse"
-                class="navbar-toggler"
-                data-target="#navcol-1"
-        >
+              th:src="@{/css/logo.svg}"
+              style="min-height: 5vh;max-height: 7vh;"/></a
+          ><button
+            data-toggle="collapse"
+            class="navbar-toggler"
+            data-target="#navcol-1"
+          >
             <span class="sr-only">Toggle navigation</span
             ><span class="navbar-toggler-icon"></span>
-        </button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul
-                        class="nav navbar-nav mx-auto"
-                        style="font-family: Roboto, sans-serif;"
-                >
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link active" href="#">Posts</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" href="#">Geeks</a>
-                    </li>
+          </button>
+          <div class="collapse navbar-collapse" id="navcol-1">
+            <ul
+              class="nav navbar-nav mx-auto"
+              style="font-family: Roboto, sans-serif;"
+            >
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" href="#">Posts</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" href="#">Geeks</a>
+              </li>
 
-                    <!-- if user is signed in -->
+              <!-- if user is signed in -->
 
-                    <li
-                            class="nav-item"
-                            role="presentation"
-                            sec:authorize="isAuthenticated()"
-                    >
-                        <a class="nav-link" th:href="@{/profile}">Profile</a>
-                    </li>
-                </ul>
-                <span class="navbar-text actions">
-              <form method="POST" th:action="@{/logout}" sec:authorize="isAuthenticated()">
-                <button class="btn btn-danger"
-                >Sign Out</button
-                >
+              <li
+                class="nav-item"
+                role="presentation"
+                sec:authorize="isAuthenticated()"
+              >
+                <a class="nav-link" th:href="@{/profile}">Profile</a>
+              </li>
+            </ul>
+            <span class="navbar-text actions">
+              <form
+                method="POST"
+                th:action="@{/logout}"
+                sec:authorize="isAuthenticated()"
+              >
+                <button class="btn btn-danger">Sign Out</button>
               </form>
-                </span>
+            </span>
 
-                <!-- if user is not signed in -->
+            <!-- if user is not signed in -->
 
-                <span
-                        class="navbar-text actions"
-                        sec:authorize="!isAuthenticated()"
-                >
+            <span
+              class="navbar-text actions"
+              sec:authorize="!isAuthenticated()"
+            >
               <a class="login" th:href="@{/login}">Sign In</a>
               <a
-                      class="btn btn-light action-button"
-                      role="button"
-                      th:href="@{/register}"
-                      style="background-color: rgb(58,171,224);"
-              >Sign Up</a
+                class="btn btn-light action-button"
+                role="button"
+                th:href="@{/register}"
+                style="background-color: rgb(58,171,224);"
+                >Sign Up</a
               >
             </span>
-            </div>
+          </div>
         </div>
-    </nav>
-</div>
+      </nav>
+    </div>
 
-<!-- End: Navigation with Button -->
+    <!-- End: Navigation with Button -->
 
-<div class="container" th:fragment="content">
-    <p>Main content</p>
-</div>
-
-</body>
+    <div class="container" th:fragment="content">
+      <p>Main content</p>
+    </div>
+  </body>
 </html>
