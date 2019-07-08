@@ -22,12 +22,12 @@
     <div class="row">
         <div class="card col-10" style="">
             <div class="card-body" style="padding: 2vh;padding-bottom: 1vh;">
-                <h5 class="card-title" th:text="${post.title}">
+                <h5 class="card-title" th:text="${post.title}" style="margin-bottom: 1vh;">
                     Title
                 </h5>
                 <span
                         class="text-muted card-subtitle mb-2"
-                        style="margin:6px; margin-bottom: 3vh;"
+                        style="margin-bottom: 4vh;"
                 >submitted
               <time
                       th:title="${post.getCreationDate()}"
@@ -41,7 +41,7 @@
               >goRuslan</a
               ></span
                 >
-                <p class="card-text" th:text="${post.url}">
+                <p class="card-text" th:text="${post.url}" style="margin-top: 3vh;">
                     Some Text Here.
                 </p>
                 <div
@@ -107,22 +107,45 @@
     </div>
 
     <!-- Comment -->
+
+
+
+
+
+
     <div
             class="row d-flex d-lg-flex justify-content-center justify-content-lg-center"
-            style="margin-top: 3vh; border: 1px solid rgba(0,0,0,.125);"
+             th:each="comment : ${post.getComments()}"
+            style="margin-top: 1vh; border: 1px solid rgba(0,0,0,.125);"
     >
         <div
                 class="col"
                 style="margin: 1vh;padding-top: 1vh;"
         >
-            <h6 style="margin-left: 0;margin-bottom: 1vh;font-size: 2vh;">
-                <i
-                        class="fa fa-user"
-                        style="font-size: 2.5vh;margin-right: 1vh;color: #3aabe0;"
-                ></i
-                >User_name
-            </h6>
-            <p>This is a test comment for the post This is a test comment for the postThis is a test comment for the postThis is a test comment for the postThis is a test comment for the postThis is a test comment for the post</p>
+<!--            <span class="row">-->
+<!--                <span class="text-muted" th:text="${comment.getPrettyTime()}"> 5 hours ago</span> by-->
+<!--            <a href="#" th:text="${comment.getCreatedBy()}"-->
+<!--                    style="margin-left: 0;margin-bottom: 1vh;font-size: 2vh;">-->
+<!--                User_name-->
+<!--            </a>-->
+<!--            </span>-->
+
+            <span class="text-muted card-subtitle mb-2"
+                  style="margin-bottom: 4vh;">
+              <time
+                      th:title="${comment.getCreationDate()}"
+                      th:datetime="${comment.getCreationDate()}"
+                      class="live-timestamp"
+                      th:text="${comment.getPrettyTime()}"
+              >1 hour(s)
+              </time>
+              by
+              <a href="/" class="author" th:text="${comment.createdBy}"
+              >goRuslan</a
+              ></span>
+
+
+            <p class="body" th:text="${comment.getBody()}" style="margin-top: 2vh;">This is a test comment for the post This is a test comment for the postThis is a test comment for the postThis is a test comment for the postThis is a test comment for the postThis is a test comment for the post</p>
         </div>
     </div>
 </div>

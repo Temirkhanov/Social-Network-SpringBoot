@@ -1,5 +1,6 @@
 package com.goruslan.socialgeeking.bootstrap;
 
+import com.goruslan.socialgeeking.domain.Comment;
 import com.goruslan.socialgeeking.domain.Post;
 import com.goruslan.socialgeeking.domain.Role;
 import com.goruslan.socialgeeking.domain.User;
@@ -50,8 +51,18 @@ public class DatabaseLoader implements CommandLineRunner {
         posts.put("File download example using Spring REST Controller","https://www.jeejava.com/file-download-example-using-spring-rest-controller/");
 
         posts.forEach((k,v) -> {
-            postRepository.save(new Post(k,v));
-            // we will do something with comments later
+            Post post = new Post(k, v);
+            postRepository.save(post);
+
+            Comment spring = new Comment("Thank you for this link related to Spring Boot. I love it, great post!", post);
+            Comment security = new Comment("I love that you're talking about Spring Security", post);
+            Comment pwa = new Comment("What is this Progressive Web App thing all about? PWAs sound really cool.", post);
+            Comment comments[] = {spring,security,pwa};
+            for(Comment comment : comments) {
+                commentRepository.save(comment);
+                post.addComment(comment);
+            }
+
         });
 
         long postCount = postRepository.count();
