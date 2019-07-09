@@ -85,50 +85,25 @@
               odio, dapibus ac facilisis in, egestas eget quam. Donec id elit
               non mi porta gravida at eget metus.
             </p>
-            <div
-              class="btn-group border-white border-primary-color"
-              role="group"
-            >
-              <button
-                class="btn"
-                type="button"
-                style="background-color: rgba(30,126,52,0);color: #1eb53a;"
-              >
-                <span
-                  class="badge badge-primary"
-                  style="margin-right: 2px;color: rgb(123,126,123);font-size: 2vh;background-color: rgba(0,123,255,0);"
-                  >42</span
-                ><i class="fa fa-thumbs-up" style="font-size: 2.5vh;"></i>
-              </button>
-              <button
-                class="btn"
-                type="button"
-                style="background-color: rgba(30,126,52,0);color: #e5053a;"
-              >
-                <span
-                  class="badge badge-primary"
-                  style="margin-right: 2px;color: rgb(123,126,123);font-size: 2vh;background-color: rgba(0,123,255,0);"
-                  >42</span
-                ><i class="fa fa-thumbs-down" style="font-size: 2.5vh;"></i>
-              </button>
 
               <!-- Comments -->
 
               <a th:href="@{'/post/' + ${post.id} + '#comments'}">
                 <button
-                  class="btn"
+                  class="btn btn-light"
                   type="button"
-                  style="color: #3aabe0;background-color: rgba(30,126,52,0);"
+                  style="color: #3aabe0;background-color: rgba(30,126,52,0); margin-bottom: 0.5vh;"
                 >
+                  <i class="fa fa-commenting" style="font-size: 2vh;"></i>
                   <span
-                    class="badge badge-primary"
-                    style="margin-right: 2px;color: rgb(123,126,123);font-size: 2vh;background-color: rgba(0,123,255,0);"
-                    th:text="${post.getComments().size()}"
+                    class="badge badge-primary font-weight-normal"
+                    style="margin-right: 2px;color: rgb(123,126,123);font-size: 1.8vh;background-color: rgba(0,123,255,0);"
+                    th:text="|${post.getComments().size()} comments|"
                     >0</span
-                  ><i class="fa fa-commenting" style="font-size: 2.5vh;"></i>
+                  >
                 </button>
               </a>
-            </div>
+
           </div>
         </div>
       </div>

@@ -41,94 +41,60 @@
               >goRuslan</a
               ></span
                 >
-                <p class="card-text" th:text="${post.url}" style="margin-top: 3vh;">
+                <p class="card-text" th:text="${post.url}" style="margin-top: 1.5vh; margin-bottom: 2vh;">
                     Some Text Here.
                 </p>
-                <div
-                        class="btn-group border-white border-primary-color"
-                        role="group"
-                >
-                    <button
-                            class="btn"
-                            type="button"
-                            style="background-color: rgba(30,126,52,0);color: #1eb53a;"
-                    >
-                <span
-                        class="badge badge-primary"
-                        style="margin-right: 2px;color: rgb(123,126,123);font-size: 2vh;background-color: rgba(0,123,255,0);"
-                >42</span
-                ><i class="fa fa-thumbs-up" style="font-size: 2.5vh;"></i>
-                    </button>
-                    <button
-                            class="btn"
-                            type="button"
-                            style="background-color: rgba(30,126,52,0);color: #e5053a;"
-                    >
-                <span
-                        class="badge badge-primary"
-                        style="margin-right: 2px;color: rgb(123,126,123);font-size: 2vh;background-color: rgba(0,123,255,0);"
-                >42</span
-                ><i
-                            class="fa fa-thumbs-down"
-                            style="font-size: 2.5vh;"
-                    ></i></button
-                    ><button
-                        class="btn"
-                        type="button"
-                        style="color: #3aabe0;background-color: rgba(30,126,52,0);"
-                >
-                <span
-                        class="badge badge-primary"
-                        style="margin-right: 2px;color: rgb(123,126,123);font-size: 2vh;background-color: rgba(0,123,255,0);"
-                        th:text="${post.getComments().size()}"
-                >42</span
-                ><i class="fa fa-commenting" style="font-size: 2.5vh;"></i>
-                </button>
-                </div>
-                <div
-                        class="form-group d-flex flex-row justify-content-between align-items-center align-content-center"
-                >
 
-              <textarea
-                      class="border rounded"
-                      style="width: 90%;margin-right: 1vh;margin-top: 2vh;padding: 1vh;"
-                      placeholder="Your comment goes here..."
-              ></textarea
-              ><button
-                        class="btn btn-primary border-primary-color"
-                        type="button"
-                        style="background-color: #3aabe0;"
-                >
-                    Submit
-                </button>
+<!--                <div class="form-group d-flex flex-row justify-content-between align-items-center align-content-center">-->
+<!--              <textarea class="border rounded"-->
+<!--                        style="width: 90%;margin-right: 1vh;margin-top: 2vh;padding: 1vh;"-->
+<!--                        placeholder="Your comment goes here...">-->
+<!--              </textarea>-->
+
+<!--                    <button class="btn btn-primary border-primary-color"-->
+<!--                            type="button"-->
+<!--                            style="background-color: #3aabe0;">-->
+<!--                    Submit-->
+<!--                </button>-->
+<!--                </div>-->
+
+                <div class="row addcomment" sec:authorize="hasRole('ROLE_USER')">
+                    <div class="col-10">
+                        <form id="frmAddComment" method="POST" th:action="@{/post/comments}" th:object="${comment}">
+                            <input type="hidden" th:field="*{post}"/>
+                            <div class="form-group">
+                                <textarea class="form-control" id="comment" rows="3" th:field="*{body}"></textarea>
+                            </div>
+                            <button type="submit" class="btn " style="color: white; ;background: rgb(58,171,224);">Add Comment</button>
+                        </form>
+                    </div>
                 </div>
+
+
+
+
+
             </div>
         </div>
     </div>
 
+    <span
+            class=" row text-muted mb-2"
+            th:text="|All ${post.getComments().size()} comments:|"
+            style="margin: 2vh; margin-left: 0vh;"
+    >All 21 comments: </span>
+
     <!-- Comment -->
 
-
-
-
-
-
     <div
-            class="row d-flex d-lg-flex justify-content-center justify-content-lg-center"
+            class="row col-10 d-flex d-lg-flex justify-content-center justify-content-lg-center"
              th:each="comment : ${post.getComments()}"
-            style="margin-top: 1vh; border: 1px solid rgba(0,0,0,.125);"
+            style="margin-top: 1vh; margin-bottom: 1vh; border: 1px solid rgba(0,0,0,.125);"
     >
         <div
                 class="col"
                 style="margin: 1vh;padding-top: 1vh;"
         >
-<!--            <span class="row">-->
-<!--                <span class="text-muted" th:text="${comment.getPrettyTime()}"> 5 hours ago</span> by-->
-<!--            <a href="#" th:text="${comment.getCreatedBy()}"-->
-<!--                    style="margin-left: 0;margin-bottom: 1vh;font-size: 2vh;">-->
-<!--                User_name-->
-<!--            </a>-->
-<!--            </span>-->
 
             <span class="text-muted card-subtitle mb-2"
                   style="margin-bottom: 4vh;">
@@ -145,10 +111,12 @@
               ></span>
 
 
-            <p class="body" th:text="${comment.getBody()}" style="margin-top: 2vh;">This is a test comment for the post This is a test comment for the postThis is a test comment for the postThis is a test comment for the postThis is a test comment for the postThis is a test comment for the post</p>
+            <p class="body" th:text="${comment.getBody()}" style="margin-top: 1vh;">This is a test comment for the post This is a test comment for the postThis is a test comment for the postThis is a test comment for the postThis is a test comment for the postThis is a test comment for the post</p>
         </div>
     </div>
 </div>
+
+<br/><br/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -1,10 +1,7 @@
 package com.goruslan.socialgeeking.domain;
 
 import com.goruslan.socialgeeking.service.BeanUtil;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import javax.persistence.Entity;
@@ -30,9 +27,10 @@ import java.util.Date;
  */
 
 @Entity
-@Data
-@NoArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Comment extends Auditable{
 
     @Id

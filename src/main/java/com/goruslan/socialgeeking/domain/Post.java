@@ -1,10 +1,7 @@
 package com.goruslan.socialgeeking.domain;
 
 import com.goruslan.socialgeeking.service.BeanUtil;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.URL;
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -37,9 +34,10 @@ import java.util.List;
 
 
 @Entity
-@Data
-@NoArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Post extends Auditable{
 
     @Id

@@ -1,9 +1,12 @@
 package com.goruslan.socialgeeking.controller;
 
+import com.goruslan.socialgeeking.domain.Comment;
 import com.goruslan.socialgeeking.domain.Post;
+import com.goruslan.socialgeeking.repository.CommentRepository;
 import com.goruslan.socialgeeking.repository.PostRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,9 +26,12 @@ public class PostController {
     private static final Logger logger = LoggerFactory.getLogger(PostController.class);
 
     private PostRepository postRepository;
+    private CommentRepository commentRepository;
 
-    public PostController(PostRepository postRepository) {
+
+    public PostController(PostRepository postRepository, CommentRepository commentRepository) {
         this.postRepository = postRepository;
+        this.commentRepository = commentRepository;
     }
 
     @GetMapping("/")
@@ -38,7 +44,11 @@ public class PostController {
     public String read(@PathVariable Long id, Model model) {
         Optional<Post> post = postRepository.findById(id);
         if( post.isPresent() ) {
-            model.addAttribute("post", post.get());
+            Post currentPost = post.get();
+            Comment comment = new Comment();
+            comment.setPost(currentPost);
+            model.addAttribute("comment", comment);
+            model.addAttribute("post", currentPost);
             model.addAttribute("success", model.containsAttribute("success"));
             return "post/view";
 
@@ -68,6 +78,18 @@ public class PostController {
             return "redirect:/post/{id}";
 
         }
+    }
+
+    @Secured({"ROLE_USER"})
+    @PostMapping("/post/comments")
+    public String addComment(@Valid Comment comment, BindingResult bindingResult){
+        if(bindingResult.hasErrors()) {
+            logger.info("There was a problem adding a new comment.");
+        } else {
+            commentRepository.save(comment);
+            logger.info("New comment was saved.");
+        }
+        return "redirect:/post/" + comment.getPost().getId();
     }
 
 }
