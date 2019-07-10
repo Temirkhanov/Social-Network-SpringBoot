@@ -4,6 +4,7 @@ import com.goruslan.socialgeeking.domain.Comment;
 import com.goruslan.socialgeeking.domain.Post;
 import com.goruslan.socialgeeking.repository.CommentRepository;
 import com.goruslan.socialgeeking.repository.PostRepository;
+import com.goruslan.socialgeeking.service.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.annotation.Secured;
@@ -25,24 +26,24 @@ public class PostController {
 
     private static final Logger logger = LoggerFactory.getLogger(PostController.class);
 
-    private PostRepository postRepository;
+    private PostService postService;
     private CommentRepository commentRepository;
 
 
-    public PostController(PostRepository postRepository, CommentRepository commentRepository) {
-        this.postRepository = postRepository;
+    public PostController(PostService postService, CommentRepository commentRepository) {
+        this.postService = postService;
         this.commentRepository = commentRepository;
     }
 
     @GetMapping("/")
     public String list(Model model) {
-        model.addAttribute("posts", postRepository.findAll());
+        model.addAttribute("posts", postService.findAll());
         return "post/list";
     }
 
     @GetMapping("/post/{id}")
     public String read(@PathVariable Long id, Model model) {
-        Optional<Post> post = postRepository.findById(id);
+        Optional<Post> post = postService.findById(id);
         if( post.isPresent() ) {
             Post currentPost = post.get();
             Comment comment = new Comment();
@@ -58,19 +59,19 @@ public class PostController {
     }
 
     @GetMapping("/post/submit")
-    public String newpostForm(Model model){
+    public String newPostForm(Model model){
         model.addAttribute("post", new Post());
         return "post/submit";
     }
 
     @PostMapping("/post/submit")
-    public String createpost(@Valid Post post, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+    public String createPost(@Valid Post post, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if( bindingResult.hasErrors()){
             logger.info("Validation error while submitting a new post.");
             model.addAttribute("post", post);
             return "post/submit";
         } else {
-            postRepository.save(post);
+            postService.save(post);
             logger.info("New Post was saved successfully.");
             redirectAttributes
                     .addAttribute("id", post.getId())
