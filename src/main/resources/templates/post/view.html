@@ -32,12 +32,13 @@
                     <h5 th:text="${post.title}">Lorem Ipsum dolor sit amet</h5>
                     <div class="info">
                 <span
-                        class="text-muted"
+                        class="text-muted">
+                    <span
                         th:title="${post.getCreationDate()}"
                         th:datetime="${post.getCreationDate()}"
                         th:text="${post.getPrettyTime()}"
-                        style="margin-top: 10px;"
-                >4 hours ago by&nbsp;<a
+                        style="margin-top: 10px;">
+                        >4 hours ago by</span> by <a
                         href="#"
                         th:href="@{'/u/' + ${post.getUser().getUsername()}}"
                         th:text="${post.getUser().getUsername()}"
@@ -63,17 +64,25 @@
                     ></i
                     >0 Comments</span
                     >
+                    <form id="frmAddComment" method="POST" th:action="@{/post/comments}" th:object="${comment}">
+                        <input type="hidden" th:field="*{post}"/>
+                        <div class="form-group">
+                            <textarea class="form-control" id="comment" rows="3" th:field="*{body}"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" >Add Comment</button>
+                    </form>
                     <hr />
                 </div>
                 <div class="faq-item" th:each="comment : ${post.getComments()}">
                     <div id="comment" class="answer" style="padding: 15px;">
                 <span
-                        class="text-muted" th:title="${comment.getCreationDate()}"
+                        class="text-muted" style="margin-top: 10px;margin-bottom: 20px;font-size: 15px;">
+                    <span th:title="${comment.getCreationDate()}"
                         th:datetime="${comment.getCreationDate()}" th:text="${comment.getPrettyTime()}"
-                        style="margin-top: 10px;margin-bottom: 20px;font-size: 15px;"
-                >4 hours ago by&nbsp;<a
+
+                >4 hours ago by</span> by <a
                         href="#"
-                        style="color: rgb(0,123,255);" th:text="${comment.createdBy}"
+                        style="color: rgb(0,123,255);" th:text="${comment.getCreatedBy()}"
                 >John Smith</a
                 ></span
                 >
