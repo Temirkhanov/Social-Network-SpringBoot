@@ -5,10 +5,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.URL;
 import org.ocpsoft.prettytime.PrettyTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -61,11 +58,10 @@ public class Post extends Auditable{
         comments.add(comment);
     }
 
-    public String getDomainName() throws URISyntaxException {
-        URI uri = new URI(this.url);
-        String domain = uri.getHost();
-        return domain.startsWith("www.") ? domain.substring(4) : domain;
-    }
+
+    @ManyToOne      // Relationship. Many posts can belong to one user.
+    private User user;
+
 
     public String getPrettyTime() {
         PrettyTime pt = BeanUtil.getBean(PrettyTime.class);

@@ -1,12 +1,14 @@
 package com.goruslan.socialgeeking.domain;
 
 
+import com.goruslan.socialgeeking.domain.validator.PasswordsMatch;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.*;
 
@@ -16,6 +18,7 @@ import java.util.*;
 @Getter
 @Setter
 @ToString
+@PasswordsMatch
 public class User implements UserDetails {
 
     @Id
@@ -32,7 +35,7 @@ public class User implements UserDetails {
     private String password;
 
     @NonNull
-    @Column(nullable = false)
+    @Column(nullable = true)
     private boolean enabled;
 
     // Sets up 3rd table between roles and users. User might have one or few roles so we fetch all the roles.
@@ -43,6 +46,34 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id") // (role) id -> role_id
     )
     private Set<Role> roles = new HashSet<>();
+
+
+    @NonNull
+    @NotEmpty(message = "Full Name is required.")
+    private String fullName;
+
+    @NonNull
+    @NotEmpty(message = "Education is required.")
+    private String education;
+
+    @NonNull
+    @NotEmpty(message = "Experience is required.")
+    private String experience;
+
+    @NonNull
+    @NotEmpty(message = "Summary of skills is required.")
+    private String skills;
+
+    @NonNull
+    @NotEmpty(message = "Username is required.")
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    @Transient // This annotation is used to declare what instance variables cannot be persisted to database
+    @NotEmpty(message = "Password Confirmation is required.")
+    private String confirmPassword;
+
+
 
     public void addRole(Role role) {
         roles.add(role);
@@ -60,11 +91,7 @@ public class User implements UserDetails {
         }
         return authorities;
     }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
+    
 
     @Override
     public boolean isAccountNonExpired() {

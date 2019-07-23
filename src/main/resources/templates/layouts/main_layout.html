@@ -1,110 +1,135 @@
 <!DOCTYPE html>
 <html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-  <head th:fragment="head(title)">
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-    />
-    <title th:text="${title}">Social Geeking</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto"
-    />
+<head>
+  <meta charset="utf-8" />
+  <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+  />
+  <title th:text="${title}">Social Geeking</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i"
+  />
+  <link
+          rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+  />
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
+  />
+  <link rel="stylesheet" th:href="@{/css/fontawesome5-overrides.min.css}"/>
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css"
+  />
+  <link rel="stylesheet" th:href="@{/css/smoothproducts.css}" />
+</head>
 
-    <link rel="stylesheet" th:href="@{/css/socialgeeking.css}" />
-    <!-- <link rel="stylesheet" th:href="@{/css/styles.css}" /> -->
-  </head>
+<body>
+<nav
+        class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar"
+>
+  <div class="container">
+    <a class="navbar-brand logo" href="#">Social <strong>Geeking</strong></a
+    ><button
+          data-toggle="collapse"
+          class="navbar-toggler"
+          data-target="#navcol-1"
+  >
+          <span class="sr-only">Toggle navigation</span
+          ><span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navcol-1">
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" href="list.html">posts</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" href="features.html">geeks</a>
+        </li>
 
-  <body>
-    <!-- Start: Navigation with Button -->
-    <div>
-      <nav
-        class="navbar navbar-light navbar-expand-md navigation-clean-button"
-        style="height: 9vh;"
-        th:fragment="navigation"
-      >
-        <div class="container">
-          <a class="navbar-brand" href="/"
-            ><img
-              th:src="@{/css/logo.svg}"
-              style="min-height: 5vh;max-height: 7vh;"/></a
-          ><button
-            data-toggle="collapse"
-            class="navbar-toggler"
-            data-target="#navcol-1"
-          >
-            <span class="sr-only">Toggle navigation</span
-            ><span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navcol-1">
-            <ul
-              class="nav navbar-nav mx-auto"
-              style="font-family: Roboto, sans-serif;"
-            >
-              <li class="nav-item" role="presentation">
-                <a class="nav-link active" href="#">Posts</a>
-              </li>
-              <li class="nav-item" role="presentation">
-                <a class="nav-link" href="#">Geeks</a>
-              </li>
 
-              <!-- if user is signed in -->
 
-              <li
-                class="nav-item"
-                role="presentation"
-                sec:authorize="isAuthenticated()"
-              >
-                <a class="nav-link" th:href="@{/profile}">Profile</a>
-              </li>
-            </ul>
-            <span class="navbar-text actions">
-              <form
+
+
+
+        <!-- if user is signed in -->
+        <li class="nav-item" role="presentation" sec:authorize="isAuthenticated()">
+          <a class="nav-link" th:href="@{/profile}">profile</a>
+        </li>
+
+        <li class="nav-item" role="presentation">
+        <form
                 method="POST"
                 th:action="@{/logout}"
                 sec:authorize="isAuthenticated()"
-              >
-                <button class="btn btn-danger">Sign Out</button>
-              </form>
-            </span>
+        >
+            <button
+                    class="nav-link link text-danger d-xl-flex justify-content-xl-center align-items-xl-center"
+                    style="border: none; background: none;"
 
-            <!-- if user is not signed in -->
-
-            <span
-              class="navbar-text actions"
-              sec:authorize="!isAuthenticated()"
+            ><i class="fa fa-sign-out" id="navbar-icon"></i>&nbsp;logout</button
             >
-              <a class="login" th:href="@{/login}">Sign In</a>
-              <a
-                class="btn btn-light action-button"
-                role="button"
-                th:href="@{/register}"
-                style="background-color: rgb(58,171,224);"
-                >Sign Up</a
-              >
-            </span>
-          </div>
-        </div>
-      </nav>
-    </div>
+        </form>
+          </li>
 
-    <!-- End: Navigation with Button -->
+        <!-- if user is not signed in -->
 
-    <div class="container" th:fragment="content">
-      <p>Main content</p>
+              <li class="nav-item" role="presentation " sec:authorize="!isAuthenticated()" >
+          <a
+                  class="nav-link text-primary d-xl-flex justify-content-xl-center align-items-xl-center"
+                  th:href="@{/login}"
+          ><i class="fa fa-sign-in" id="navbar-icon"></i>&nbsp;login</a
+          >
+        </li>
+
+        <li class="nav-item float-xl-right" role="presentation" sec:authorize="!isAuthenticated()">
+          <a
+                  class="nav-link text-success d-xl-flex justify-content-xl-center align-items-xl-center"
+                  th:href="@{/register}"
+          ><i class="fa fa-user-plus" id="navbar-icon"></i
+          >&nbsp;register</a
+          >
+        </li>
+
+
+
+
+
+
+
+      </ul>
     </div>
-  </body>
+  </div>
+</nav>
+<div
+        class="container"
+        style="padding: 20px;margin-top: 100px;min-height: 600px;padding-top: 0;"
+>
+  <p>Content goes here</p>
+</div>
+<!-- Start: Footer White -->
+<footer class="page-footer" style="margin-top: 30px;">
+  <div class="footer-copyright" style="margin: 0;padding: 0;">
+    <p>© 2019 Copyright Text</p>
+  </div>
+</footer>
+<!-- End: Footer White -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script th:src="@{/css/smoothproducts.min.js}" ></script>
+<script th:src="@{/css/theme.js}"></script>
+</body>
 </html>

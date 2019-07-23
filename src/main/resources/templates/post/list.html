@@ -1,114 +1,114 @@
 <!DOCTYPE html>
 <html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-  <head th:replace="~{layouts/main_layout :: head(title = 'Social Geeking')}">
-  </head>
+<head th:replace="~{layouts/main_layout :: head(title = 'Social Geeking')}">
+</head>
 
-  <body
-    class="d-flex flex-column"
-    id="hero"
-    style="background-color: #ffffff;height: 100%;"
-  >
-    <!-- Start: Navigation with Button -->
+<body>
+<nav th:replace="~{layouts/main_layout :: nav}"></nav>
 
-    <nav th:replace="~{layouts/main_layout :: nav}"></nav>
-
-    <!-- End: Navigation with Button -->
-
-    <!--************************************************************************************************
- **************************************************************************************************-->
-
-    <section
-      class="d-flex"
-      style="padding: 4vh;padding-top: 5vh;width: 100%;height: 100%;"
-    >
-      <div
-        class="container flex-column-reverse"
-        style="height: 100%;width: 100%;"
+<div
+        class="container"
+        style="padding: 20px;margin-top: 100px;min-height: 600px;padding-top: 0;"
         th:fragment="content"
-      >
-        <div
-          class="row"
-          style="margin-right: 0;"
-          sec:authorize="isAuthenticated()"
-        >
-          <div class="col">
-            <a th:href="@{/post/submit}">
-              <button
-                class="btn btn-success text-center border rounded-circle d-block float-right d-lg-flex"
-                type="button"
-                style="padding: 10px;margin-bottom: 1vh;"
-              >
-                <i
-                  class="fa fa-plus float-left"
-                  style="padding: 5px; padding-left: 7px; padding-right: 7px; margin: 0;margin-right: 0px;font-size: 22px;"
-                ></i>
-              </button>
-            </a>
-          </div>
-        </div>
+>
+  <div
+          class="clean-blog-post"
+          style="padding: 20px;padding-bottom: 25px;margin: 15px;"
+  >
+    <!-- Submit New Post Button -->
+    <div class="row" style="margin: 0;" sec:authorize="isAuthenticated()">
+      <div class="col">
+        <a th:href="@{/post/submit}">
+          <button class="btn btn-outline-primary float-right" type="button">
+            <i class="icon-pencil"></i>New Post
+          </button>
+        </a>
+      </div>
+    </div>
 
-        <!-- posts -->
-
-        <div class="row card" style="margin: 2vh;" th:each="post : ${posts}">
-          <div class="card-body" style="padding: 2vh; padding-bottom: 0;">
-            <h6
-              class="card-title "
-              th:href="@{'/post/' + ${post.id}}"
-              th:text="${post.title}"
-              style="margin:5px; "
-            >
-              Title Goes Here
-            </h6>
-            <span
-              class="text-muted card-subtitle mb-2"
-              style="margin:6px; margin-bottom: 3vh;"
-              >submitted
-              <time
-                th:title="${post.getCreationDate()}"
-                th:datetime="${post.getCreationDate()}"
-                class="live-timestamp"
-                th:text="${post.getPrettyTime()}"
-                >1 hour(s)</time
-              >
-              by
-              <a href="/" class="author" th:text="${post.createdBy}"
-                >goRuslan</a
-              ></span
-            >
-
-            <p class="card-text" style="font-size: 16px; margin: 10px;">
-              Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo
-              odio, dapibus ac facilisis in, egestas eget quam. Donec id elit
-              non mi porta gravida at eget metus.
-            </p>
-
-              <!-- Comments -->
-
-              <a th:href="@{'/post/' + ${post.id} + '#comments'}">
-                <button
-                  class="btn btn-light"
-                  type="button"
-                  style="color: #3aabe0;background-color: rgba(30,126,52,0); margin-bottom: 0.5vh;"
-                >
-                  <i class="fa fa-commenting" style="font-size: 2vh;"></i>
-                  <span
-                    class="badge badge-primary font-weight-normal"
-                    style="margin-right: 2px;color: rgb(123,126,123);font-size: 1.8vh;background-color: rgba(0,123,255,0);"
-                    th:text="|${post.getComments().size()} comments|"
-                    >0</span
-                  >
-                </button>
-              </a>
-
-          </div>
+    <!-- Quote -->
+    <div class="row" style="margin: 0;margin-top: 20px;">
+      <div class="col">
+        <div class="block-heading">
+          <h2
+                  class="text-info d-xl-flex justify-content-center align-items-center"
+          >
+            Posts
+          </h2>
+          <p
+                  class="d-xl-flex justify-content-center"
+                  style="color: rgb(112,116,120);"
+          >
+            Let's support and share all the things we love!<br />
+          </p>
         </div>
       </div>
-    </section>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-  </body>
+    </div>
+
+    <!-- Posts -->
+    <div
+            class="row d-lg-flex justify-content-lg-center shadow-sm border rounded"
+            style="margin-left: 0;margin-right: 0;margin-top: 30px;padding-top: 25px;padding-bottom: 25px;"
+            th:each="post : ${posts}"
+    >
+      <div class="col-lg-11 order-12">
+        <h5 th:text="${post.title}">
+          Lorem Ipsum dolor sit amet
+        </h5>
+        <div class="info">
+              <span
+                      class="text-muted"
+                      th:title="${post.getCreationDate()}"
+                      th:datetime="${post.getCreationDate()}"
+                      th:text="${post.getPrettyTime()}"
+              >4 hours ago by&nbsp;<a
+                      href="#"
+                      style="color: rgb(0,123,255);"
+                      th:href="@{'/u/' + ${post.getUser().getUsername()}}"
+                      th:text="${post.getUser().getUsername()}"
+              >John Smith</a
+              ></span
+              >
+        </div>
+        <p style="font-size: 15px;" th:text="${post.url}">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam
+          urna, dignissim nec auctor in, mattis vitae leo. Lorem ipsum dolor
+          sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim
+          nec auctor in, mattis vitae leo.
+        </p>
+        <a th:href="@{'/post/' + ${post.id}}">
+          <button class="btn btn-outline-primary btn-sm" type="button">
+            Read More</button
+          >
+        </a>
+        <a
+              href="#"
+              style="margin-left: 20px;"
+              th:href="@{'/post/' + ${post.id}}"
+              th:text="|${post.getComments().size()} comments|"
+      >78 Comments</a
+      >
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Start: Footer White -->
+<!--
+<footer class="page-footer" style="margin-top: 30px;">
+  <div class="footer-copyright" style="margin: 0;padding: 0;">
+	<p>© 2019 Copyright Text</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script src="assets/js/smoothproducts.min.js"></script>
+<script src="assets/js/theme.js"></script> -->
+</body>
 </html>

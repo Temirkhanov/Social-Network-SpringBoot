@@ -8,79 +8,50 @@
 </head>
 
 <body>
-<nav th:replace="~{layouts/main_layout :: nav}"></nav>
-
-<!-- Start: Login Form Clean -->
-<div
-        class="login-clean"
-        style="background-color: rgb(255,255,255);margin-top: 3vh;"
->
-    <form method="post" th:action="@{/login}">
-        <div class="alert alert-danger" th:if="${param.error != null}">
-            Invalid username and password.
-        </div>
-        <div class="alert alert-success" th:if="${param.logout != null}">
-            You have been logged out.
-        </div>
-        <h2 class="sr-only">Login Form</h2>
-        <div class="illustration"></div>
-        <div class="form-row" style="margin-bottom: 3vh;">
-            <div
-                    class="col d-xl-flex justify-content-xl-center align-items-xl-center"
-            >
-                <img th:src="@{/css/logo.svg}" style="max-width: 90%;" />
+<main class="page login-page">
+    <section
+            class="clean-block clean-form dark"
+            style="background-color: rgb(255,255,255);"
+    >
+        <div class="container">
+            <div class="block-heading" style="padding-top: 40px;">
+                <h2 class="text-info">Log In</h2>
+                <p>Geek is Portuguese for "pencil neck."<br /></p>
             </div>
-        </div>
-        <div class="form-row" style="margin-bottom: 2vh;">
-            <div class="col">
-                <input
-                        class="form-control"
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        style="background-color: rgba(101,206,255,0.26);"
-                />
-            </div>
-        </div>
-        <div class="form-row" style="margin-bottom: 2vh;">
-            <div class="col">
-                <input
-                        class="form-control"
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        style="background-color: rgba(101,206,255,0.26);"
-                />
-            </div>
-        </div>
-        <div class="form-row" style="margin-bottom: 1vh;">
-            <div class="col">
-                <div class="form-check">
-                    <input
-                            class="form-check-input"
-                            type="checkbox"
-                            id="formCheck-1"
-                    /><label class="form-check-label" id="remember-me" name="remember-me" for="formCheck-1"
-                >Remember Me</label
-                >
+            <form method="post" class="shadow" th:action="@{/login}">
+                <div class="alert alert-danger" th:if="${param.error != null}">
+                    Invalid username and password.
                 </div>
-            </div>
-        </div>
-        <div class="form-row" style="margin-bottom: 4vh;">
-            <div class="col">
-                <button
-                        class="btn btn-primary btn-block"
-                        type="submit"
-                        style="background-color: #3aabe0;"
-                >
+                <div class="alert alert-success" th:if="${param.logout != null}">
+                    You have been logged out.
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label
+                    ><input class="form-control item" type="email" id="email" name="email"/>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label
+                    ><input class="form-control" type="password" id="password" name="password"/>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="checkbox"
+                        /><label class="form-check-label" for="checkbox"
+                    >Remember me</label
+                    >
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-block" type="submit">
                     Log In
                 </button>
-            </div>
+            </form>
         </div>
-    </form>
-</div>
-<!-- End: Login Form Clean -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    </section>
+</main>
+
 </body>
 </html>

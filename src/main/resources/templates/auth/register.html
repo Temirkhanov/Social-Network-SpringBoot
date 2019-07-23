@@ -1,98 +1,168 @@
 <!DOCTYPE html>
 <html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-  <head th:replace="~{layouts/main_layout :: head(title = 'Social Geeking')}">
-  </head>
+<head th:replace="~{layouts/main_layout :: head(title = 'Social Geeking')}">
+</head>
 
-  <body>
-    <nav th:replace="~{layouts/main_layout :: nav}"></nav>
+<body>
+<nav th:replace="~{layouts/main_layout :: nav}"></nav>
 
-    <!-- Start: Registration Form with Photo -->
-    <div
-      class="register-photo"
-      role="form"
-      style="background-color: rgb(255,255,255);"
-    >
-      <!-- Start: Form Container -->
-      <div class="form-container" style="max-width: 700px;">
-        <form method="POST" style="padding-right: 20px;padding-left: 20px;">
-          <div class="form-row" style="margin-bottom: 3vh;">
-            <div class="col">
-              <h2 class="text-center"><strong>Create</strong> an account.</h2>
-            </div>
-          </div>
-          <div class="form-row" style="margin-bottom: 3vh;">
-            <div
-              class="col d-lg-flex justify-content-lg-center align-items-lg-center"
-            >
-              <input
-                class="border rounded form-control"
-                type="text"
-                name="name"
-                placeholder="Name"
-                style="max-width: 500px;background-color: rgba(113,210,255,0.27);"
-                required autofocus />
-            </div>
-          </div>
-          <div class="form-row" style="margin-bottom: 3vh;">
-            <div
-              class="col d-lg-flex justify-content-lg-center align-items-lg-center"
-            >
-              <input
-                class="border rounded form-control"
-                type="email"
-                name="email"
-                placeholder="Email"
-                style="max-width: 500px;background-color: rgba(113,210,255,0.27);"
-                required autofocus/>
-            </div>
-          </div>
-          <div class="form-row" style="margin-bottom: 3vh;">
-            <div
-              class="col d-lg-flex justify-content-lg-center align-items-lg-center"
-            >
-              <input
-                class="border rounded form-control"
-                type="password"
-                name="password"
-                placeholder="Password"
-                style="max-width: 500px;background-color: rgba(113,210,255,0.27);"
-                required/>
-            </div>
-          </div>
-          <div class="form-row" style="margin-bottom: 3vh;">
-            <div
-              class="col d-lg-flex justify-content-lg-center align-items-lg-center"
-            >
-              <input
-                class="border rounded form-control"
-                type="password"
-                name="password-repeat"
-                placeholder="Password (repeat)"
-                style="max-width: 500px;background-color: rgba(113,210,255,0.27);"
-                required/>
-            </div>
-          </div>
-          <div class="form-row" style="padding-bottom: 3vh;">
-            <div class="col d-lg-flex justify-content-lg-center">
-              <button
-                class="btn btn-primary btn-block d-lg-flex justify-content-lg-center"
-                type="submit"
-                style="max-width: 400px;margin-top: 15px;background-color: #3aabe0;"
-              >
-                Sign Up
-              </button>
-            </div>
-          </div>
-        </form>
+<main class="page registration-page">
+  <section
+          class="clean-block clean-form dark"
+          style="background-color: rgb(255,255,255);"
+  >
+    <div class="container">
+      <div class="block-heading">
+        <h2 class="text-info">Registration</h2>
+        <p>This will only take 2 minutes of your time.</p>
       </div>
-      <!-- End: Form Container -->
+
+      <!-- Success Registration-->
+      <div class="row d-flex justify-content-center" th:if="${success}">
+        <div class="col-6 alert alert-success " role="alert">
+          Success! Thank you for registering.
+        </div>
+      </div>
+
+      <form
+              method="POST"
+              class="shadow"
+              role="form"
+              th:action="@{/register}"
+              th:object="${user}"
+              th:if="!${success}"
+      >
+        <!-- Validation Errors -->
+        <div class="row" th:if="${validationErrors}">
+          <div class="col d-flex justify-content-center align-items-center">
+                <span class="text-danger align-middle">
+                  <ul th:each="error : ${validationErrors}">
+                    <li th:text="${error.getDefaultMessage()}"></li>
+                  </ul>
+                </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input
+                  class="form-control item"
+                  type="text"
+                  id="fullName"
+                  placeholder="John Doe"
+                  name="fullName"
+                  th:field="*{fullName}"
+                  required
+                  autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+                  class="form-control item"
+                  type="email"
+                  id="email"
+                  placeholder="JohnDoe@gmail.com"
+                  name="email"
+                  th:field="*{email}"
+                  required
+                  autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="username">GitHub Username</label>
+          <input
+                  class="form-control item"
+                  type="text"
+                  id="username"
+                  placeholder="JDoe"
+                  name="username"
+                  th:field="*{username}"
+                  required
+                  autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="education">Education</label>
+          <input
+                  class="form-control item"
+                  type="text"
+                  id="education"
+                  placeholder="Bachelors in Computer Science"
+                  name="education"
+                  th:field="*{education}"
+                  required
+                  autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="skills">Skills Summary</label>
+          <input
+                  class="form-control item"
+                  type="text"
+                  id="skills"
+                  placeholder="Java, React, Web-Dev, SQL"
+                  name="skill"
+                  th:field="*{skills}"
+                  required
+                  autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="experience">Experience</label>
+          <input
+                  class="form-control item"
+                  type="text"
+                  id="experience"
+                  placeholder="4 years of Software Engineering using Java Spring and JavaScript React."
+                  name="work"
+                  th:field="*{experience}"
+                  required
+                  autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+                  class="form-control item"
+                  type="password"
+                  id="password"
+                  name="password"
+                  th:field="*{password}"
+                  required
+                  autofocus
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Password (repeat)</label>
+          <input
+                  class="form-control item"
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  th:field="*{confirmPassword}"
+                  required
+                  autofocus
+          />
+        </div>
+
+        <button class="btn btn-primary btn-block" type="submit">
+          Sign Up
+        </button>
+      </form>
     </div>
-    <!-- End: Registration Form with Photo -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-  </body>
+  </section>
+</main>
+</body>
 </html>

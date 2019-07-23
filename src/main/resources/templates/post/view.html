@@ -37,7 +37,7 @@
               >1 hour(s)</time
               >
               by
-              <a href="/" class="author" th:text="${post.createdBy}"
+              <a th:href="@{'/u/' + ${post.getUser().getUsername()}}" class="author" th:text="${post.getUser().getUsername()}"
               >goRuslan</a
               ></span
                 >

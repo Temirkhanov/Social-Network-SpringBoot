@@ -25,6 +25,10 @@ public class DatabaseLoader implements CommandLineRunner {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
 
+
+    private Map<String,User> users = new HashMap<>();
+
+
     public DatabaseLoader(PostRepository postRepository, CommentRepository commentRepository, UserRepository userRepository, RoleRepository roleRepository) {
         this.postRepository = postRepository;
         this.commentRepository = commentRepository;
@@ -51,7 +55,16 @@ public class DatabaseLoader implements CommandLineRunner {
         posts.put("File download example using Spring REST Controller","https://www.jeejava.com/file-download-example-using-spring-rest-controller/");
 
         posts.forEach((k,v) -> {
+            User u1 = users.get("user@gmail.com");
+            User u2 = users.get("super@gmail.com");
             Post post = new Post(k, v);
+            if(k.startsWith("Build")) {
+                post.setUser(u1);
+            } else {
+                post.setUser(u2);
+            }
+
+
             postRepository.save(post);
 
             Comment spring = new Comment("Thank you for this link related to Spring Boot. I love it, great post!", post);
@@ -69,6 +82,7 @@ public class DatabaseLoader implements CommandLineRunner {
         System.out.println("Number of posts in the database: " + postCount );
     }
 
+
     private void addUserAndRoles() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String secret = "{bcrypt}" + encoder.encode("password");
@@ -78,17 +92,26 @@ public class DatabaseLoader implements CommandLineRunner {
         Role adminRole = new Role("ROLE_ADMIN");
         roleRepository.save(adminRole);
 
-        User user = new User("user@gmail.com",secret,true);
+        User user = new User("user@gmail.com",secret,true,"John Doe","Bachelors in Computer Science","4 Years as a Software Engineer","React, Spring Boot, Java, Python",
+                "JoDoe");
         user.addRole(userRole);
+        user.setConfirmPassword(secret);
         userRepository.save(user);
+        users.put("user@gmail.com", user);
 
-        User admin = new User("admin@gmail.com", secret, true);
+        User admin = new User("admin@gmail.com",secret,true,"Admin Uiet","Master in CS","12 Years as a Web Developer","JavaScript, Angular, Java, Python, Ruby",
+                "AdminUe");
         admin.addRole(adminRole);
+        admin.setConfirmPassword(secret);
         userRepository.save(admin);
 
-        User master = new User("master@gmail.com",secret,true);
+        User master = new User("super@gmail.com",secret,true,"Super Duper","PhD in Artificial Intel.","23 years as a Database Professional", "SQL, MangoDB, Spring MVC", "SuperrrR");
         master.addRoles(new HashSet<>(Arrays.asList(userRole,adminRole)));
+        master.setConfirmPassword(secret);
         userRepository.save(master);
+
+        users.put("user@gmail.com", user);
+        users.put("super@gmail.com", master);
 
     }
 }
