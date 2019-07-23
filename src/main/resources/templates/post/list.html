@@ -8,11 +8,11 @@
 </head>
 
 <body>
-<nav th:replace="~{layouts/main_layout :: nav}"></nav>
+<nav th:replace="~{layouts/main_layout :: nav}"  style="z-index: 9999;"></nav>
 
 <div
         class="container"
-        style="padding: 20px;margin-top: 100px;min-height: 600px;padding-top: 0;"
+        style="padding: 20px;margin-top: 100px;min-height: 600px;padding-top: 0; z-index: 9998;"
         th:fragment="content"
 >
   <div
@@ -35,12 +35,12 @@
       <div class="col">
         <div class="block-heading">
           <h2
-                  class="text-info d-xl-flex justify-content-center align-items-center"
+                  class="text-info d-flex justify-content-center align-items-center"
           >
             Posts
           </h2>
           <p
-                  class="d-xl-flex justify-content-center"
+                  class="d-flex justify-content-center"
                   style="color: rgb(112,116,120);"
           >
             Let's support and share all the things we love!<br />
@@ -51,8 +51,8 @@
 
     <!-- Posts -->
     <div
-            class="row d-lg-flex justify-content-lg-center shadow-sm border rounded"
-            style="margin-left: 0;margin-right: 0;margin-top: 30px;padding-top: 25px;padding-bottom: 25px;"
+            class="row d-flex justify-content-center shadow-sm border rounded"
+            style="margin-left: 0;margin-right: 0;margin-top: 10px;padding-top: 25px;padding-bottom: 25px;"
             th:each="post : ${posts}"
     >
       <div class="col-lg-11 order-12">

@@ -64,13 +64,15 @@
                     ></i
                     >0 Comments</span
                     >
-                    <form id="frmAddComment" method="POST" th:action="@{/post/comments}" th:object="${comment}">
+
+                    <form sec:authorize="isAuthenticated()" id="frmAddComment" method="POST" th:action="@{/post/comments}" th:object="${comment}">
                         <input type="hidden" th:field="*{post}"/>
                         <div class="form-group">
                             <textarea class="form-control" id="comment" rows="3" th:field="*{body}"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" >Add Comment</button>
                     </form>
+
                     <hr />
                 </div>
                 <div class="faq-item" th:each="comment : ${post.getComments()}">
