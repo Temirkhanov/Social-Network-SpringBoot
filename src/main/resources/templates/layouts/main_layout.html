@@ -41,7 +41,7 @@
         class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar"
 >
   <div class="container">
-    <a class="navbar-brand logo" href="#">Social <strong>Geeking</strong></a
+    <a class="navbar-brand logo" th:href="@{/}">Social <strong>Geeking</strong></a
     ><button
           data-toggle="collapse"
           class="navbar-toggler"
@@ -53,16 +53,11 @@
     <div class="collapse navbar-collapse" id="navcol-1">
       <ul class="nav navbar-nav ml-auto">
         <li class="nav-item" role="presentation">
-          <a class="nav-link active" href="list.html">posts</a>
+          <a class="nav-link active" th:href="@{/}">posts</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a class="nav-link" href="features.html">geeks</a>
+          <a class="nav-link" th:href="@{/geeks}">geeks</a>
         </li>
-
-
-
-
-
 
         <!-- if user is signed in -->
         <li class="nav-item" role="presentation" sec:authorize="isAuthenticated()">
@@ -102,11 +97,6 @@
           >&nbsp;register</a
           >
         </li>
-
-
-
-
-
 
 
       </ul>

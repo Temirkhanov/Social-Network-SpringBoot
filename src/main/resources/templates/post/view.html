@@ -12,112 +12,85 @@
 <body>
 <nav th:replace="~{layouts/main_layout :: nav}"></nav>
 
-<div class="container" style="margin-top: 10vh;">
-    <div class="alert alert-success" role="alert" th:if="${success}">
-        New post was created!
-    </div>
+<main class="page faq-page">
+    <section
+            class="clean-block clean-faq dark"
+            style="background-color: rgb(255,255,255);"
+    >
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-info">Comments</h2>
+                <p>Treat others the way you want to be treated.<br /></p>
+            </div>
 
-    <!-- Post -->
-
-    <div class="row">
-        <div class="card col-10" style="">
-            <div class="card-body" style="padding: 2vh;padding-bottom: 1vh;">
-                <h5 class="card-title" th:text="${post.title}" style="margin-bottom: 1vh;">
-                    Title
-                </h5>
-                <span
-                        class="text-muted card-subtitle mb-2"
-                        style="margin-bottom: 4vh;"
-                >submitted
-              <time
-                      th:title="${post.getCreationDate()}"
-                      th:datetime="${post.getCreationDate()}"
-                      class="live-timestamp"
-                      th:text="${post.getPrettyTime()}"
-              >1 hour(s)</time
-              >
-              by
-              <a th:href="@{'/u/' + ${post.getUser().getUsername()}}" class="author" th:text="${post.getUser().getUsername()}"
-              >goRuslan</a
-              ></span
-                >
-                <p class="card-text" th:text="${post.url}" style="margin-top: 1.5vh; margin-bottom: 2vh;">
-                    Some Text Here.
-                </p>
-
-<!--                <div class="form-group d-flex flex-row justify-content-between align-items-center align-content-center">-->
-<!--              <textarea class="border rounded"-->
-<!--                        style="width: 90%;margin-right: 1vh;margin-top: 2vh;padding: 1vh;"-->
-<!--                        placeholder="Your comment goes here...">-->
-<!--              </textarea>-->
-
-<!--                    <button class="btn btn-primary border-primary-color"-->
-<!--                            type="button"-->
-<!--                            style="background-color: #3aabe0;">-->
-<!--                    Submit-->
-<!--                </button>-->
-<!--                </div>-->
-
-                <div class="row addcomment" sec:authorize="hasRole('ROLE_USER')">
-                    <div class="col-10">
-                        <form id="frmAddComment" method="POST" th:action="@{/post/comments}" th:object="${comment}">
-                            <input type="hidden" th:field="*{post}"/>
-                            <div class="form-group">
-                                <textarea class="form-control" id="comment" rows="3" th:field="*{body}"></textarea>
-                            </div>
-                            <button type="submit" class="btn " style="color: white; ;background: rgb(58,171,224);">Add Comment</button>
-                        </form>
-                    </div>
+            <div class="block-content">
+                <div class="alert alert-success" role="alert" th:if="${success}">
+                    New post was created!
                 </div>
 
+                <div class="faq-item">
+                    <h5 th:text="${post.title}">Lorem Ipsum dolor sit amet</h5>
+                    <div class="info">
+                <span
+                        class="text-muted"
+                        th:title="${post.getCreationDate()}"
+                        th:datetime="${post.getCreationDate()}"
+                        th:text="${post.getPrettyTime()}"
+                        style="margin-top: 10px;"
+                >4 hours ago by&nbsp;<a
+                        href="#"
+                        th:href="@{'/u/' + ${post.getUser().getUsername()}}"
+                        th:text="${post.getUser().getUsername()}"
+                        style="color: rgb(0,123,255);"
+                >John Smith</a
+                ></span
+                >
+                    </div>
 
-
-
-
+                    <p
+                            th:text="${post.url}"
+                            style="font-size: 16px;margin-bottom: 20px;margin-top: 10px;"
+                    >
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                        quam urna, dignissim nec auctor in, mattis vitae leo. Lorem
+                        ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam
+                        urna, dignissim nec auctor in, mattis vitae leo.
+                    </p>
+                    <span class="d-lg-flex align-items-lg-center" th:text="|All ${post.getComments().size()} comments:|"
+                    ><i
+                            class="icon-bubbles"
+                            style="margin-right: 7px;font-size: 20px;"
+                    ></i
+                    >0 Comments</span
+                    >
+                    <hr />
+                </div>
+                <div class="faq-item" th:each="comment : ${post.getComments()}">
+                    <div id="comment" class="answer" style="padding: 15px;">
+                <span
+                        class="text-muted" th:title="${comment.getCreationDate()}"
+                        th:datetime="${comment.getCreationDate()}" th:text="${comment.getPrettyTime()}"
+                        style="margin-top: 10px;margin-bottom: 20px;font-size: 15px;"
+                >4 hours ago by&nbsp;<a
+                        href="#"
+                        style="color: rgb(0,123,255);" th:text="${comment.createdBy}"
+                >John Smith</a
+                ></span
+                >
+                        <p th:text="${comment.getBody()}"
+                                style="color: rgba(0,0,0,0.93);margin: 0;margin-top: 10px;font-size: 15px;"
+                        >
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                            quam urna, dignissim nec auctor in, mattis vitae leo. Lorem
+                            ipsum dolor sit amet, consectetur adipiscing elit.&nbsp;Lorem
+                            ipsum dolor sit amet, consectetur adipiscing elit.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+</main>
 
-    <span
-            class=" row text-muted mb-2"
-            th:text="|All ${post.getComments().size()} comments:|"
-            style="margin: 2vh; margin-left: 0vh;"
-    >All 21 comments: </span>
-
-    <!-- Comment -->
-
-    <div
-            class="row col-10 d-flex d-lg-flex justify-content-center justify-content-lg-center"
-             th:each="comment : ${post.getComments()}"
-            style="margin-top: 1vh; margin-bottom: 1vh; border: 1px solid rgba(0,0,0,.125);"
-    >
-        <div
-                class="col"
-                style="margin: 1vh;padding-top: 1vh;"
-        >
-
-            <span class="text-muted card-subtitle mb-2"
-                  style="margin-bottom: 4vh;">
-              <time
-                      th:title="${comment.getCreationDate()}"
-                      th:datetime="${comment.getCreationDate()}"
-                      class="live-timestamp"
-                      th:text="${comment.getPrettyTime()}"
-              >1 hour(s)
-              </time>
-              by
-              <a href="/" class="author" th:text="${comment.createdBy}"
-              >goRuslan</a
-              ></span>
-
-
-            <p class="body" th:text="${comment.getBody()}" style="margin-top: 1vh;">This is a test comment for the post This is a test comment for the postThis is a test comment for the postThis is a test comment for the postThis is a test comment for the postThis is a test comment for the post</p>
-        </div>
-    </div>
-</div>
-
-<br/><br/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

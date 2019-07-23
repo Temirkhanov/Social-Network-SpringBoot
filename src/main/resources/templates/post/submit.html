@@ -1,57 +1,67 @@
 <!DOCTYPE html>
 <html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-  <head th:replace="~{layouts/main_layout :: head(title = 'Social Geeking')}">
-  </head>
+<head th:replace="~{layouts/main_layout :: head(title = 'Social Geeking')}">
+</head>
 
-  <body>
-    <nav th:replace="~{layouts/main_layout :: nav}"></nav>
-
-    <!-- Start: Contact Form Clean -->
-    <div class="contact-clean" style="background-color: rgb(255,255,255);">
+<body>
+<nav th:replace="~{layouts/main_layout :: nav}"></nav>
+<main class="page login-page">
+  <section
+          class="clean-block clean-form dark"
+          style="background-color: rgb(255,255,255);"
+  >
+    <div class="container">
+      <div class="block-heading" style="padding-top: 40px;">
+        <h2 class="text-info">New Post</h2>
+        <p>
+          Quality and consistency are key to social media success.<br />
+        </p>
+      </div>
       <form
-        id="frmAddPost"
-        method="POST"
-        th:action="@{/post/submit}"
-        th:object="${post}"
-        style="margin-top: 3vh;"
+              method="POST"
+              th:action="@{/post/submit}"
+              th:object="${post}"
+              class="shadow"
       >
-        <h2 class="text-center">New Post</h2>
-        <!-- Start: Success Example -->
         <div class="form-group">
-          <input
-            class="form-control"
-            type="text"
-            name="title"
-            placeholder="Title"
-            required="required"
-            th:field="*{title}"
-          />
+          <label for="title">Title</label
+          ><input
+                id="title"
+                class="form-control item"
+                type="text"
+                name="title"
+                placeholder="Title"
+                required="required"
+                th:field="*{title}"
+        />
           <small th:errors="*{title}" style="color:red;"></small>
         </div>
 
-        <!-- End: Success Example -->
         <div class="form-group">
-          <textarea
-            class="form-control"
-            name="body"
-            placeholder="Body"
-            rows="14"
-            required="required"
-            th:field="*{url}"
-          ></textarea>
+          <label for="body">Body</label
+          ><textarea
+                id="body"
+                class="form-control"
+                name="body"
+                placeholder="Body"
+                rows="3"
+                required="required"
+                th:field="*{url}"
+        >
+              </textarea>
           <small th:errors="*{url}" style="color:red;"></small>
         </div>
-        <div class="form-group">
-          <button class="btn btn-primary" type="submit">Post</button>
-        </div>
+
+        <button class="btn btn-primary btn-block" type="submit">
+          Submit
+        </button>
       </form>
     </div>
-    <!-- End: Contact Form Clean -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-  </body>
+  </section>
+</main>
+</body>
 </html>
