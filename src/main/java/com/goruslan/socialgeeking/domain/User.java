@@ -26,9 +26,9 @@ public class User implements UserDetails {
     private Long id;
 
     @NonNull
-    @Size(min = 8, max = 20)
+    @Size(min = 2, max = 20)
     @Column(nullable = false, unique = true)
-    private String email;
+    private String username;
 
     @NonNull
     @Column(length = 150)
@@ -64,15 +64,10 @@ public class User implements UserDetails {
     @NotEmpty(message = "Summary of skills is required.")
     private String skills;
 
-    @NonNull
-    @NotEmpty(message = "Username is required.")
-    @Column(nullable = false, unique = true)
-    private String username;
 
     @Transient // This annotation is used to declare what instance variables cannot be persisted to database
     @NotEmpty(message = "Password Confirmation is required.")
     private String confirmPassword;
-
 
 
     public void addRole(Role role) {

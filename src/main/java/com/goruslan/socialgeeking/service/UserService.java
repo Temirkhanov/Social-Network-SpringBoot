@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -34,21 +33,14 @@ public class UserService {
             - If validation constraint error exists, 'save' method won't work. */
         user.setConfirmPassword(secret);
 
-        // Assigning a role to the user
+        // Assigning a role to the user and enable the account
         user.addRole(roleService.findByName("ROLE_USER"));
-
-        // Set an activation code
-
-        // Disable the user before saving.
+        user.setEnabled(true);
 
         // Save the user.
         save(user);
 
-        // Send activation email.
-        sendActivationEmail(user);
-
         // Return user.
-
         return user;
     }
 
@@ -60,14 +52,10 @@ public class UserService {
     @Transactional
     public void saveUsers(User... users) {
         for(User user : users) {
-            logger.info("Saving User: " + user.getEmail());
+            logger.info("Saving User: " + user.getUsername());
             userRepository.save(user);
         }
     }
 
-    public void sendActivationEmail(User user) {
-        // Send the email
-
-    }
 
 }

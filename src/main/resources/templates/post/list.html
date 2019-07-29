@@ -56,9 +56,9 @@
             th:each="post : ${posts}"
     >
       <div class="col-lg-11 order-12">
-        <h5 th:text="${post.title}">
+        <h6 th:text="${post.title}">
           Lorem Ipsum dolor sit amet
-        </h5>
+        </h6>
         <div class="info">
               <span
                       class="text-muted" style="margin-right: 0;">
@@ -69,8 +69,8 @@
                 >4 hours ago by</span>by <a
                       href="#"
                       style="color: rgb(0,123,255);"
-                      th:href="@{'/u/' + ${post.getUser().getUsername()}}"
-                      th:text="${post.getUser().getUsername()}"
+                      th:href="@{'/u/' + ${post.getCreatedBy()}}"
+                      th:text="${post.getCreatedBy()}"
               >John Smith</a
               ></span>
         </div>

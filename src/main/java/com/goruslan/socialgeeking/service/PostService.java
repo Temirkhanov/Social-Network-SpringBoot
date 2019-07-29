@@ -18,7 +18,8 @@ public class PostService {
     }
 
     public List<Post> findAll() {
-        return postRepository.findAll();
+//        return postRepository.findAll();
+        return postRepository.findAllByOrderByLastModifiedDateDesc();
     }
 
     public Optional<Post> findById(Long id) {

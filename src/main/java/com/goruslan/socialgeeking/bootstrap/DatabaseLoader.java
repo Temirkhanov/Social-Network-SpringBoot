@@ -55,8 +55,8 @@ public class DatabaseLoader implements CommandLineRunner {
         posts.put("File download example using Spring REST Controller","https://www.jeejava.com/file-download-example-using-spring-rest-controller/");
 
         posts.forEach((k,v) -> {
-            User u1 = users.get("user@gmail.com");
-            User u2 = users.get("super@gmail.com");
+            User u1 = users.get("userg");
+            User u2 = users.get("super");
             Post post = new Post(k, v);
             if(k.startsWith("Build")) {
                 post.setUser(u1);
@@ -92,26 +92,24 @@ public class DatabaseLoader implements CommandLineRunner {
         Role adminRole = new Role("ROLE_ADMIN");
         roleRepository.save(adminRole);
 
-        User user = new User("user@gmail.com",secret,true,"John Doe","Bachelors in Computer Science","4 Years as a Software Engineer","React, Spring Boot, Java, Python",
-                "JoDoe");
+        User user = new User("userg",secret,true,"John Doe","Bachelors in Computer Science","4 Years as a Software Engineer","React, Spring Boot, Java, Python");
         user.addRole(userRole);
         user.setConfirmPassword(secret);
         userRepository.save(user);
         users.put("user@gmail.com", user);
 
-        User admin = new User("admin@gmail.com",secret,true,"Admin Uiet","Master in CS","12 Years as a Web Developer","JavaScript, Angular, Java, Python, Ruby",
-                "AdminUe");
+        User admin = new User("admin",secret,true,"Admin Uiet","Master in CS","12 Years as a Web Developer","JavaScript, Angular, Java, Python, Ruby");
         admin.addRole(adminRole);
         admin.setConfirmPassword(secret);
         userRepository.save(admin);
 
-        User master = new User("super@gmail.com",secret,true,"Super Duper","PhD in Artificial Intel.","23 years as a Database Professional", "SQL, MangoDB, Spring MVC", "SuperrrR");
+        User master = new User("super",secret,true,"Super Duper","PhD in Artificial Intel.","23 years as a Database Professional", "SQL, MangoDB, Spring MVC");
         master.addRoles(new HashSet<>(Arrays.asList(userRole,adminRole)));
         master.setConfirmPassword(secret);
         userRepository.save(master);
 
-        users.put("user@gmail.com", user);
-        users.put("super@gmail.com", master);
+        users.put("userg", user);
+        users.put("super", master);
 
     }
 }

@@ -39,9 +39,8 @@
                         th:text="${post.getPrettyTime()}"
                         style="margin-top: 10px;">
                         >4 hours ago by</span> by <a
-                        href="#"
-                        th:href="@{'/u/' + ${post.getUser().getUsername()}}"
-                        th:text="${post.getUser().getUsername()}"
+                        th:href="@{'/u/' + ${post.getCreatedBy()}}"
+                        th:text="${post.getCreatedBy()}"
                         style="color: rgb(0,123,255);"
                 >John Smith</a
                 ></span

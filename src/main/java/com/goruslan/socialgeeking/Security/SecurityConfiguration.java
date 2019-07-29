@@ -30,7 +30,7 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
                     .and()
                 .formLogin()
                     .loginPage("/login").permitAll()
-                    .usernameParameter("email")
+                    .usernameParameter("username")
                     .and()
                 .logout()
                     .and()
