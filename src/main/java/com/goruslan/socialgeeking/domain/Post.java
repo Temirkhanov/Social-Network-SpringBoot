@@ -7,8 +7,6 @@ import org.ocpsoft.prettytime.PrettyTime;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;

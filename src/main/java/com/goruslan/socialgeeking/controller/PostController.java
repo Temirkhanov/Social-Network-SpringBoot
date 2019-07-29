@@ -3,7 +3,6 @@ package com.goruslan.socialgeeking.controller;
 import com.goruslan.socialgeeking.domain.Comment;
 import com.goruslan.socialgeeking.domain.Post;
 import com.goruslan.socialgeeking.repository.CommentRepository;
-import com.goruslan.socialgeeking.repository.PostRepository;
 import com.goruslan.socialgeeking.service.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

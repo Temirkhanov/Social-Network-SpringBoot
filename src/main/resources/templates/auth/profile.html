@@ -1,178 +1,102 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head
-    th:replace="~{layouts/main_layout :: head(title = 'Springit - Account Profile Page')}"
-  >
-  </head>
-  <body>
-    <nav th:replace="~{layouts/main_layout :: nav}"></nav>
-    <div th:replace="~{layouts/main_layout :: jumbotron}"></div>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head th:replace="~{layouts/main_layout :: head(title = 'Social Geeking')}">
+</head>
 
-    <!-- profile -->
-    <div id="profile" class="container">
-      <div class="row">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Overview</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Posts</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Comments</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Preferences</a>
-          </li>
-        </ul>
-      </div>
+<body>
+<nav
+        th:replace="~{layouts/main_layout :: nav}"
+        style="z-index: 9999;"
+></nav>
 
-      <div class="row">
-        <div class="col-8">
-          <div class="row">
-            <div class="card col-12" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">What's new in Spring Boot 2</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                  submitted 7 days ago by therealdanvega
-                </h6>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="card-link">8 Comments</a>
-                <a href="#" class="card-link">Share</a>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="card col-12" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">What's new in Spring Boot 2</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                  submitted 7 days ago by therealdanvega
-                </h6>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="card-link">8 Comments</a>
-                <a href="#" class="card-link">Share</a>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="card col-12" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">What's new in Spring Boot 2</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                  submitted 7 days ago by therealdanvega
-                </h6>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="card-link">8 Comments</a>
-                <a href="#" class="card-link">Share</a>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="card col-12" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">What's new in Spring Boot 2</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                  submitted 7 days ago by therealdanvega
-                </h6>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="card-link">8 Comments</a>
-                <a href="#" class="card-link">Share</a>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="card col-12" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">What's new in Spring Boot 2</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                  submitted 7 days ago by therealdanvega
-                </h6>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="card-link">8 Comments</a>
-                <a href="#" class="card-link">Share</a>
-              </div>
-            </div>
+<main class="page">
+  <section class="clean-block features">
+    <div class="container" style="padding-top: 20px;">
+      <div class="d-block" style="margin: 10px;margin-bottom: 20px;">
+        <div
+                class="row d-xl-flex justify-content-xl-center"
+                style="margin: 0;padding-top: 20px;padding-bottom: 20px;"
+        >
+          <div
+                  class="col-12 d-flex justify-content-center justify-content-sm-center"
+                  style="padding: 0;margin: 10px;"
+          >
+            <div
+                    class="border rounded-circle shadow-sm d-flex"
+                    id="profile-pic"
+                    style='background-image: url("assets/img/port.jpg");height: 180px;width: 180px;'
+            ></div>
           </div>
         </div>
-        <!-- Right Side -->
-        <div class="col-3 offset-1">
-          <div class="row">
-            <div class="card col-12">
-              <img
-                class="card-img-top"
-                th:src="@{/images/profile_small.png}"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <p class="card-text">
-                  <a href="/u/therealdanvega">/u/therealdanvega</a>
-                </p>
-                <a href="../post/submit.html"
-                  ><button
-                    type="button"
-                    class="btn btn-primary btn-lg btn-block"
-                  >
-                    New Post
-                  </button></a
+        <div
+                class="row d-xl-flex justify-content-xl-center"
+                style="margin: 0;padding-top: 20px;padding-bottom: 20px;"
+        >
+          <div
+                  class="col d-flex flex-column align-content-center justify-content-xl-center align-items-xl-center"
+          >
+            <div class="row">
+              <div
+                      class="col-12 d-flex justify-content-center align-items-center align-content-center"
+              >
+                <h2
+                        class="display-4 text-center text-info"
+                        style="font-size: 40px;width: 100%;"
                 >
+                  John Doe
+                </h2>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="card col-12">
-              <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-              <div class="card-body">
-                <h5 class="card-title">Your Information</h5>
-                <p class="card-text">
-                  Posts: 10<br />
-                  Comments: 3<br />
-                  User Since: November 23, 2017<br />
+            <div class="row">
+              <div class="col">
+                <p
+                        class="text-center text-secondary"
+                        style="width: 100%;font-size: 18px;"
+                >
+                  Software Engineer, Web-Developer with 10 years of
+                  experience.
                 </p>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="card col-12">
-              <h5 class="card-title recentLinks">Recent Links Clicked</h5>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                  <a href="#">What's new in Spring Boot 2</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="#">10 Features in Java 10</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="#">9 Features in Java 9</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="#">8 Features in Java 8</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="#">7 Reasons not to use Java 7</a>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
-      <!-- // row -->
+      <div>
+        <div class="row">
+          <div class="col">
+            <h4 class="text-center">All Posts</h4>
+          </div>
+        </div>
+        <!-- Start: Call To Action -->
+        <div
+                class="border rounded clean-block add-on call-to-action"
+                style="padding-top: 30px;padding-bottom: 30px;margin-bottom: 5px;"
+        >
+          <h3 style="font-size: 25px;">Lorem Ipsum dolor</h3>
+          <button class="btn btn-outline-primary btn-sm" type="button">
+            Read More
+          </button>
+        </div>
+        <!-- End: Call To Action -->
+      </div>
     </div>
-    <!-- // profile -->
-  </body>
+  </section>
+</main>
+<!-- Start: Footer White -->
+<footer class="page-footer">
+  <div class="footer-copyright" style="margin: 0;padding: 0;">
+    <p>© 2019 Copyright Text</p>
+  </div>
+</footer>
+<!-- End: Footer White -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script src="assets/js/smoothproducts.min.js"></script>
+<script src="assets/js/theme.js"></script>
+</body>
 </html>
