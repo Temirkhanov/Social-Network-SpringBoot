@@ -69,7 +69,7 @@
                 >4 hours ago by</span>by <a
                       href="#"
                       style="color: rgb(0,123,255);"
-                      th:href="@{'/u/' + ${post.getCreatedBy()}}"
+                      th:href="@{${post.getCreatedBy()}}"
                       th:text="${post.getCreatedBy()}"
               >John Smith</a
               ></span>

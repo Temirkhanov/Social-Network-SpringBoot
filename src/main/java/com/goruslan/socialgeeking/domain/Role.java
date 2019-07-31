@@ -10,12 +10,13 @@ import java.util.Collection;
 
 
 
-@Entity
+
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
+@Entity
 public class Role {
 
     @Id

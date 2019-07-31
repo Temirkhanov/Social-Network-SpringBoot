@@ -39,7 +39,7 @@
                         th:text="${post.getPrettyTime()}"
                         style="margin-top: 10px;">
                         >4 hours ago by</span> by <a
-                        th:href="@{'/u/' + ${post.getCreatedBy()}}"
+                        th:href="@{'/' + ${post.getCreatedBy()}}"
                         th:text="${post.getCreatedBy()}"
                         style="color: rgb(0,123,255);"
                 >John Smith</a
@@ -82,7 +82,7 @@
                         th:datetime="${comment.getCreationDate()}" th:text="${comment.getPrettyTime()}"
 
                 >4 hours ago by</span> by <a
-                        href="#"
+                        th:href="@{'/' + ${post.getCreatedBy()}}"
                         style="color: rgb(0,123,255);" th:text="${comment.getCreatedBy()}"
                 >John Smith</a
                 ></span

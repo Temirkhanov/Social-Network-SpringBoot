@@ -12,13 +12,14 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.*;
 
-@Entity
+
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @PasswordsMatch
+@Entity
 public class User implements UserDetails {
 
     @Id
@@ -38,6 +39,11 @@ public class User implements UserDetails {
     @Column(nullable = true)
     private boolean enabled;
 
+    @NonNull
+    @NotEmpty(message = "About you is required.")
+    private String experience;
+
+
     // Sets up 3rd table between roles and users. User might have one or few roles so we fetch all the roles.
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -45,24 +51,9 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"), // (user) ID -> user_id
             inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id") // (role) id -> role_id
     )
+
+
     private Set<Role> roles = new HashSet<>();
-
-
-    @NonNull
-    @NotEmpty(message = "Full Name is required.")
-    private String fullName;
-
-    @NonNull
-    @NotEmpty(message = "Education is required.")
-    private String education;
-
-    @NonNull
-    @NotEmpty(message = "Experience is required.")
-    private String experience;
-
-    @NonNull
-    @NotEmpty(message = "Summary of skills is required.")
-    private String skills;
 
 
     @Transient // This annotation is used to declare what instance variables cannot be persisted to database
@@ -86,6 +77,7 @@ public class User implements UserDetails {
         }
         return authorities;
     }
+
 
     @Override
     public String getUsername() {

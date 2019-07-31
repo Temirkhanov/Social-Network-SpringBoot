@@ -26,11 +26,11 @@ import java.util.Date;
  *      Provides for the specification of generation strategies for the values of primary keys.
  */
 
-@Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
 public class Comment extends Auditable{
 
     @Id

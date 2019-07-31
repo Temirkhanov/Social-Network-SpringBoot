@@ -17,21 +17,7 @@
   <section class="clean-block features">
     <div class="container" style="padding-top: 20px;">
       <div class="d-block" style="margin: 10px;margin-bottom: 20px;">
-        <div
-                class="row d-xl-flex justify-content-xl-center"
-                style="margin: 0;padding-top: 20px;padding-bottom: 20px;"
-        >
-          <div
-                  class="col-12 d-flex justify-content-center justify-content-sm-center"
-                  style="padding: 0;margin: 10px;"
-          >
-            <div
-                    class="border rounded-circle shadow-sm d-flex"
-                    id="profile-pic"
-                    style='background-image: url("assets/img/port.jpg");height: 180px;width: 180px;'
-            ></div>
-          </div>
-        </div>
+
         <div
                 class="row d-xl-flex justify-content-xl-center"
                 style="margin: 0;padding-top: 20px;padding-bottom: 20px;"
@@ -43,7 +29,7 @@
               <div
                       class="col-12 d-flex justify-content-center align-items-center align-content-center"
               >
-                <h2
+                <h2 th:text="${user.getUsername()}"
                         class="display-4 text-center text-info"
                         style="font-size: 40px;width: 100%;"
                 >
@@ -53,9 +39,9 @@
             </div>
             <div class="row">
               <div class="col">
-                <p
+                <p th:text="${user.getExperience()}"
                         class="text-center text-secondary"
-                        style="width: 100%;font-size: 18px;"
+                        style="width: 100%;font-size: 20px;"
                 >
                   Software Engineer, Web-Developer with 10 years of
                   experience.
@@ -68,18 +54,19 @@
       <div>
         <div class="row">
           <div class="col">
-            <h4 class="text-center">All Posts</h4>
+            <h5 class="text-center text-secondary" style="margin-bottom: 20px;">All Posts:</h5>
           </div>
         </div>
         <!-- Start: Call To Action -->
-        <div
+        <div th:each="post : ${posts}"
                 class="border rounded clean-block add-on call-to-action"
                 style="padding-top: 30px;padding-bottom: 30px;margin-bottom: 5px;"
         >
-          <h3 style="font-size: 25px;">Lorem Ipsum dolor</h3>
+          <h3 th:text="${post.title}"  style="font-size: 25px;">Lorem Ipsum dolor</h3>
+          <a th:href="@{'/post/' + ${post.id}}">
           <button class="btn btn-outline-primary btn-sm" type="button">
             Read More
-          </button>
+          </button> </a>
         </div>
         <!-- End: Call To Action -->
       </div>

@@ -5,6 +5,7 @@
         xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
 <head th:replace="~{layouts/main_layout :: head(title = 'Social Geeking')}">
+
 </head>
 
 <body>
@@ -46,12 +47,14 @@
           <label for="body">Body</label
           ><textarea
                 id="body"
+                type="text"
                 class="form-control"
                 name="body"
                 placeholder="Body"
                 rows="3"
                 required="required"
                 th:field="*{url}"
+                maxlength="249"
         >
               </textarea>
           <small th:errors="*{url}" style="color:red;"></small>

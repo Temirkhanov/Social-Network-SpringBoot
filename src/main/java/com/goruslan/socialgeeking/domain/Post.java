@@ -2,6 +2,7 @@ package com.goruslan.socialgeeking.domain;
 
 import com.goruslan.socialgeeking.service.BeanUtil;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -28,11 +29,12 @@ import java.util.List;
  */
 
 
-@Entity
+
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
 public class Post extends Auditable{
 
     @Id
@@ -44,8 +46,7 @@ public class Post extends Auditable{
     private String title;
 
     @NonNull
-    @NotEmpty(message = "Please enter url.")
-    @URL(message = "Please enter a valid url.")
+    @NotEmpty(message = "Please enter some body text.")
     private String url;
 
     // Comments. Mapping: One to Many. Post -> Comments

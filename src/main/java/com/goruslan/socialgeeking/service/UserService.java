@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -23,6 +24,10 @@ public class UserService {
         encoder = new BCryptPasswordEncoder();
     }
 
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     public User register(User user) {
         // Take the password from the form and encode
         String secret = "{bcrypt}" + encoder.encode(user.getPassword());
@@ -34,6 +39,7 @@ public class UserService {
         user.setConfirmPassword(secret);
 
         // Assigning a role to the user and enable the account
+
         user.addRole(roleService.findByName("ROLE_USER"));
         user.setEnabled(true);
 

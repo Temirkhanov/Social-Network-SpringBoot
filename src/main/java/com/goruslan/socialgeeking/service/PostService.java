@@ -26,6 +26,10 @@ public class PostService {
         return postRepository.findById(id);
     }
 
+    public List<Post> findUserPosts(String username) {
+        return postRepository.findAllByCreatedBy(username);
+    }
+
     public Post save(Post post) {
         return postRepository.save(post);
     }
