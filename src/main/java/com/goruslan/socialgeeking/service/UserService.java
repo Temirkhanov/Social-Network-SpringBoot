@@ -32,7 +32,6 @@ public class UserService {
         // Take the password from the form and encode
         String secret = "{bcrypt}" + encoder.encode(user.getPassword());
         user.setPassword(secret);
-
         /* Confirm password
             - Setting user's pass to encrypted pass. When we save it, @PasswordMatch annotation will throw validation constraint error.
             - If validation constraint error exists, 'save' method won't work. */
