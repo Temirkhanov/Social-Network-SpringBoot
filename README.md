@@ -1,60 +1,27 @@
 # Social Geeking
 
-Social network for geeks using Spring Boot 2. I created this project to learn Java Spring Framework.
+Social network with full CRUD functionality and user authentication and authorization. Registered users can create posts, add comments and change their profile info. 
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+Pull the repository. 
+Change the active profile in the properties file to devvelopment(dev).
+Substitute MySQL dependency with H2 database. 
+Run the main class and open ``` localhost:8080``` in your browser.
+For h2 database access go to ```localhost:8080\h2```
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
 
 End with an example of getting some data out of the system or using it for a little demo
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Deployed production version on AWS. Created web app, database and configuration with Elastic Beanstalk. 
 
 ## Built With
 
@@ -62,12 +29,7 @@ Add additional notes about how to deploy this on a live system
 * [Spring Framework 5](https://spring.io/projects/spring-framework)
 
 ## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## Authors
 
@@ -76,9 +38,3 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
